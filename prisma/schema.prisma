@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Room {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  nameFr      String
+  nameEn      String
+  descFr      String
+  descEn      String
+  capacity    Int
+  sizeSqm     Int
+  basePrice   Float
+  images      String    @default("[]")
+  amenities   String    @default("[]")
+  published   Boolean   @default(true)
+  externalRef String?   @unique
+  bookings    Booking[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Booking {
+  id            String        @id @default(cuid())
+  roomId        String
+  room          Room          @relation(fields: [roomId], references: [id])
+  guestName     String
+  guestEmail    String
+  guestPhone    String?
+  checkIn       DateTime
+  checkOut      DateTime
+  guests        Int
+  totalAmount   Float
+  currency      String        @default("CHF")
+  status        BookingStatus @default(PENDING)
+  source        BookingSource @default(DIRECT)
+  externalId    String?       @unique
+  paymentMethod PaymentMethod?
+  paymentId     String?
+  notes         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([checkIn, checkOut])
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+enum BookingSource {
+  DIRECT
+  BOOKING
+  AIRBNB
+  EXPEDIA
+  TRIP
+}
+
+enum PaymentMethod {
+  STRIPE_CARD
+  MOBILE_MONEY
+  TWINT
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+}

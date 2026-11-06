@@ -1,0 +1,184 @@
+{
+  "home": {
+    "heroTitle": "Welcome to Hotel Awaya Colline 132",
+    "heroSubtitle": "An exceptional stay in the heart of the hill",
+    "heroCta": "Book now",
+    "featuredTitle": "Our rooms",
+    "featuredSubtitle": "Choose the space that suits you",
+    "viewAll": "View all rooms",
+    "perNight": "per night",
+    "from": "From",
+    "guests": "guests",
+    "bookNow": "Book now"
+  },
+  "rooms": {
+    "title": "Our rooms",
+    "subtitle": "Find the ideal room",
+    "perNight": "per night",
+    "capacity": "Capacity",
+    "capacityUnit": "guests",
+    "size": "Size",
+    "sizeUnit": "sqm",
+    "amenities": "Amenities",
+    "viewDetails": "View details",
+    "noRooms": "No rooms available",
+    "startingFrom": "Starting from",
+    "back": "Back to rooms",
+    "description": "Description",
+    "bookThisRoom": "Book this room",
+    "amenity": {
+      "wifi": "Wi-Fi",
+      "tv": "Television",
+      "ac": "Air conditioning",
+      "minibar": "Minibar",
+      "safe": "Safe",
+      "bathtub": "Bathtub",
+      "balcony": "Balcony",
+      "jacuzzi": "Jacuzzi",
+      "terrace": "Terrace",
+      "room-service": "Room service",
+      "crib": "Crib",
+      "desk": "Desk"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "rooms": "Rooms",
+    "rates": "Rates",
+    "services": "Services",
+    "gallery": "Gallery",
+    "reviews": "Reviews",
+    "faq": "FAQ",
+    "book": "Book now"
+  },
+  "booking": {
+    "checkin": "Check-in",
+    "checkout": "Check-out",
+    "guests": "Guests",
+    "search": "Check availability",
+    "noResults": "No rooms available",
+    "select": "Select",
+    "total": "Total",
+    "nights": "nights",
+    "pay": "Pay",
+    "confirm": "Confirm booking",
+    "guestName": "Full name",
+    "guestEmail": "Email",
+    "guestPhone": "Phone",
+    "paymentMethod": "Payment method",
+    "card": "Credit card",
+    "twint": "Twint",
+    "mobileMoney": "Mobile Money",
+    "success": "Booking confirmed!",
+    "successMessage": "Confirmation email sent."
+  },
+  "footer": {
+    "contact": "Contact",
+    "legal": "Legal information",
+    "cgv": "Terms and conditions",
+    "mentions": "Legal notice",
+    "privacy": "Privacy policy",
+    "rights": "All rights reserved",
+    "description": "A haven of peace in the heart of the hill, combining modern comfort and authentic charm for an unforgettable stay.",
+    "quickLinks": "Quick Links",
+    "contactUs": "Contact Us",
+    "followUs": "Follow Us",
+    "newsletter": "Newsletter",
+    "newsletterText": "Receive our exclusive offers.",
+    "subscribe": "Subscribe",
+    "address": "Colline 132, Benin",
+    "phone": "+229 00 00 00 00",
+    "email": "contact@awaya-colline132.com"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "All the comfort you need for an unforgettable stay",
+    "wifi": {
+      "title": "High-Speed Wi-Fi",
+      "desc": "Free and unlimited connection throughout the property."
+    },
+    "breakfast": {
+      "title": "Breakfast",
+      "desc": "Varied buffet with fresh local products every morning."
+    },
+    "parking": {
+      "title": "Secure Parking",
+      "desc": "Free private parking space for our guests."
+    },
+    "reception": {
+      "title": "24/7 Reception",
+      "desc": "A team available day and night to assist you."
+    },
+    "pool": {
+      "title": "Pool & Relaxation",
+      "desc": "Relaxation area with pool and sun loungers."
+    },
+    "roomService": {
+      "title": "Room Service",
+      "desc": "Meals and drinks served directly in your room."
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know before your stay",
+    "q1": {
+      "q": "What are the check-in and check-out times?",
+      "a": "Check-in is from 2:00 PM. Check-out must be completed before 12:00 PM. If you need to arrive earlier or leave later, please contact the reception."
+    },
+    "q2": {
+      "q": "How can I cancel or modify my booking?",
+      "a": "You can cancel for free up to 48 hours before your arrival date. For any changes, please contact us by email or phone with your booking number."
+    },
+    "q3": {
+      "q": "Are pets allowed?",
+      "a": "Yes, we accept small pets (under 10 kg) for an additional fee of 20 CHF per night. Please let us know in advance."
+    },
+    "q4": {
+      "q": "Is breakfast included in the price?",
+      "a": "The buffet breakfast is included for certain rooms and rates. You can check the details during your booking or add the breakfast option at any time."
+    },
+    "q5": {
+      "q": "Do you offer an airport shuttle service?",
+      "a": "Yes, we offer a private shuttle service upon request. Please provide your flight details at least 24 hours before arrival so we can arrange your transfer."
+    }
+  },
+  "reviews": {
+    "title": "Guest Reviews",
+    "subtitle": "Discover what our travelers think about their stay",
+    "basedOn": "Based on 124 verified reviews",
+    "leaveReview": "Leave a review",
+    "review1": {
+      "author": "Sophie M.",
+      "date": "October 2026",
+      "text": "A wonderful stay! The hotel is beautiful, the staff is very attentive and the view of the hill is breathtaking. Breakfast is a real delight."
+    },
+    "review2": {
+      "author": "Jean-Pierre D.",
+      "date": "September 2026",
+      "text": "Very clean room, excellent bedding. The Wi-Fi works perfectly, which was important for my work. I highly recommend."
+    },
+    "review3": {
+      "author": "Amélie T.",
+      "date": "August 2026",
+      "text": "We spent a family weekend. The kids loved the pool. The airport shuttle service was very convenient. Thank you for the welcome!"
+    }
+  },
+  "gallery": {
+    "title": "Our Gallery",
+    "subtitle": "Immerse yourself in the atmosphere of Hotel Awaya Colline 132",
+    "all": "All",
+    "rooms": "Rooms",
+    "exterior": "Exterior",
+    "facilities": "Facilities"
+  },
+  "rates": {
+    "title": "Our Rates",
+    "subtitle": "Transparent rates for a stay with no surprises",
+    "room": "Room type",
+    "capacity": "Capacity",
+    "price": "Price per night",
+    "book": "Book",
+    "note": "* Rates may vary depending on the season and length of stay.",
+    "from": "From"
+  }
+}

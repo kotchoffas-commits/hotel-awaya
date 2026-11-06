@@ -1,0 +1,184 @@
+{
+  "home": {
+    "heroTitle": "Bienvenue à l'Hôtel Awaya Colline 132",
+    "heroSubtitle": "Un séjour d'exception au cœur de la colline",
+    "heroCta": "Réserver maintenant",
+    "featuredTitle": "Nos chambres",
+    "featuredSubtitle": "Choisissez l'espace qui vous ressemble",
+    "viewAll": "Voir toutes les chambres",
+    "perNight": "par nuit",
+    "from": "À partir de",
+    "guests": "personnes",
+    "bookNow": "Réserver"
+  },
+  "rooms": {
+    "title": "Nos chambres",
+    "subtitle": "Trouvez la chambre idéale",
+    "perNight": "par nuit",
+    "capacity": "Capacité",
+    "capacityUnit": "personnes",
+    "size": "Superficie",
+    "sizeUnit": "m²",
+    "amenities": "Équipements",
+    "viewDetails": "Voir les détails",
+    "noRooms": "Aucune chambre disponible",
+    "startingFrom": "À partir de",
+    "back": "Retour aux chambres",
+    "description": "Description",
+    "bookThisRoom": "Réserver cette chambre",
+    "amenity": {
+      "wifi": "Wi-Fi",
+      "tv": "Télévision",
+      "ac": "Climatisation",
+      "minibar": "Minibar",
+      "safe": "Coffre-fort",
+      "bathtub": "Baignoire",
+      "balcony": "Balcon",
+      "jacuzzi": "Jacuzzi",
+      "terrace": "Terrasse",
+      "room-service": "Service en chambre",
+      "crib": "Lit bébé",
+      "desk": "Bureau"
+    }
+  },
+  "nav": {
+    "home": "Accueil",
+    "rooms": "Chambres",
+    "rates": "Tarifs",
+    "services": "Services",
+    "gallery": "Galerie",
+    "reviews": "Avis",
+    "faq": "FAQ",
+    "book": "Réserver"
+  },
+  "booking": {
+    "checkin": "Arrivée",
+    "checkout": "Départ",
+    "guests": "Voyageurs",
+    "search": "Vérifier la disponibilité",
+    "noResults": "Aucune chambre disponible",
+    "select": "Sélectionner",
+    "total": "Total",
+    "nights": "nuits",
+    "pay": "Payer",
+    "confirm": "Confirmer la réservation",
+    "guestName": "Nom complet",
+    "guestEmail": "Email",
+    "guestPhone": "Téléphone",
+    "paymentMethod": "Mode de paiement",
+    "card": "Carte bancaire",
+    "twint": "Twint",
+    "mobileMoney": "Mobile Money",
+    "success": "Réservation confirmée !",
+    "successMessage": "Email de confirmation envoyé."
+  },
+  "footer": {
+    "contact": "Contact",
+    "legal": "Informations légales",
+    "cgv": "Conditions générales",
+    "mentions": "Mentions légales",
+    "privacy": "Politique de confidentialité",
+    "rights": "Tous droits réservés",
+    "description": "Un havre de paix au cœur de la colline, alliant confort moderne et charme authentique pour un séjour inoubliable.",
+    "quickLinks": "Liens rapides",
+    "contactUs": "Nous contacter",
+    "followUs": "Suivez-nous",
+    "newsletter": "Newsletter",
+    "newsletterText": "Recevez nos offres exclusives.",
+    "subscribe": "S'inscrire",
+    "address": "Colline 132, Bénin",
+    "phone": "+229 00 00 00 00",
+    "email": "contact@awaya-colline132.com"
+  },
+  "services": {
+    "title": "Nos Services",
+    "subtitle": "Tout le confort nécessaire pour un séjour inoubliable",
+    "wifi": {
+      "title": "Wi-Fi Haut Débit",
+      "desc": "Connexion gratuite et illimitée dans tout l'établissement."
+    },
+    "breakfast": {
+      "title": "Petit-Déjeuner",
+      "desc": "Buffet varié avec des produits locaux et frais chaque matin."
+    },
+    "parking": {
+      "title": "Parking Sécurisé",
+      "desc": "Place de parking privée et gratuite pour nos résidents."
+    },
+    "reception": {
+      "title": "Réception 24h/24",
+      "desc": "Une équipe disponible jour et nuit pour vous accompagner."
+    },
+    "pool": {
+      "title": "Piscine & Détente",
+      "desc": "Espace détente avec piscine et transats pour se relaxer."
+    },
+    "roomService": {
+      "title": "Service en Chambre",
+      "desc": "Repas et boissons servis directement dans votre chambre."
+    }
+  },
+  "faq": {
+    "title": "Questions Fréquentes",
+    "subtitle": "Tout ce que vous devez savoir avant votre séjour",
+    "q1": {
+      "q": "Quels sont les horaires d'arrivée et de départ ?",
+      "a": "L'arrivée (check-in) se fait à partir de 14h00. Le départ (check-out) doit être effectué avant 12h00. Si vous avez besoin d'arriver plus tôt ou de partir plus tard, veuillez contacter la réception."
+    },
+    "q2": {
+      "q": "Comment puis-je annuler ou modifier ma réservation ?",
+      "a": "Vous pouvez annuler gratuitement jusqu'à 48 heures avant votre date d'arrivée. Pour toute modification, veuillez nous contacter par email ou téléphone avec votre numéro de réservation."
+    },
+    "q3": {
+      "q": "Les animaux de compagnie sont-ils acceptés ?",
+      "a": "Oui, nous acceptons les animaux de compagnie de petite taille (moins de 10 kg) moyennant un supplément de 20 CHF par nuit. Veuillez nous prévenir à l'avance."
+    },
+    "q4": {
+      "q": "Le petit-déjeuner est-il inclus dans le prix ?",
+      "a": "Le petit-déjeuner buffet est inclus pour certaines chambres et tarifs. Vous pouvez vérifier les détails lors de votre réservation ou ajouter l'option petit-déjeuner à tout moment."
+    },
+    "q5": {
+      "q": "Proposez-vous un service de navette depuis l'aéroport ?",
+      "a": "Oui, nous proposons un service de navette privée sur demande. Veuillez nous fournir vos détails de vol au moins 24 heures avant votre arrivée pour que nous puissions organiser votre transfert."
+    }
+  },
+  "reviews": {
+    "title": "Avis de nos clients",
+    "subtitle": "Découvrez ce que nos voyageurs pensent de leur séjour",
+    "basedOn": "Basé sur 124 avis vérifiés",
+    "leaveReview": "Laisser un avis",
+    "review1": {
+      "author": "Sophie M.",
+      "date": "Octobre 2026",
+      "text": "Un séjour magnifique ! L'hôtel est superbe, le personnel est aux petits soins et la vue sur la colline est à couper le souffle. Le petit-déjeuner est un vrai délice."
+    },
+    "review2": {
+      "author": "Jean-Pierre D.",
+      "date": "Septembre 2026",
+      "text": "Chambre très propre, literie excellente. Le Wi-Fi fonctionne parfaitement, ce qui était important pour mon travail. Je recommande vivement."
+    },
+    "review3": {
+      "author": "Amélie T.",
+      "date": "Août 2026",
+      "text": "Nous avons passé un week-end en famille. Les enfants ont adoré la piscine. Le service de navette depuis l'aéroport a été très pratique. Merci pour l'accueil !"
+    }
+  },
+  "gallery": {
+    "title": "Notre Galerie",
+    "subtitle": "Plongez dans l'ambiance de l'Hôtel Awaya Colline 132",
+    "all": "Tout",
+    "rooms": "Chambres",
+    "exterior": "Extérieur",
+    "facilities": "Équipements"
+  },
+  "rates": {
+    "title": "Nos Tarifs",
+    "subtitle": "Des prix transparents pour un séjour sans surprise",
+    "room": "Type de chambre",
+    "capacity": "Capacité",
+    "price": "Prix par nuit",
+    "book": "Réserver",
+    "note": "* Les tarifs peuvent varier selon la saison et la durée du séjour.",
+    "from": "À partir de"
+  }
+}
