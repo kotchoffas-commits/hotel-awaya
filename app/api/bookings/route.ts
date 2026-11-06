@@ -102,7 +102,7 @@ export async function POST(req: NextRequest) {
       amount: amountInCents,
       currency: 'chf',
       metadata: { bookingId: booking.id },
-      payment_method_types: paymentMethodTypes,
+      payment_method_types: paymentMethodTypes as any,
       receipt_email: data.guestEmail,
     });
 

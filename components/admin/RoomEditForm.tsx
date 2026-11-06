@@ -73,7 +73,7 @@ export default function RoomEditForm({ room, locale }: { room: any | null, local
   const removeImage = (indexToRemove: number) => {
     setFormData((prev) => ({
       ...prev,
-      images: prev.images.filter((_, index) => index !== indexToRemove),
+      images: prev.images.filter((_: string, index: number) => index !== indexToRemove),
     }));
   };
 
@@ -128,7 +128,7 @@ export default function RoomEditForm({ room, locale }: { room: any | null, local
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Nom (Français)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Nom (FranÃ§ais)</label>
           <input type="text" name="nameFr" value={formData.nameFr} onChange={handleChange} required className="w-full border border-gray-300 rounded-lg px-3 py-2" />
         </div>
         <div>
@@ -139,7 +139,7 @@ export default function RoomEditForm({ room, locale }: { room: any | null, local
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Description (Français)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Description (FranÃ§ais)</label>
           <textarea name="descFr" value={formData.descFr} onChange={handleChange} required rows={4} className="w-full border border-gray-300 rounded-lg px-3 py-2" />
         </div>
         <div>
@@ -154,11 +154,11 @@ export default function RoomEditForm({ room, locale }: { room: any | null, local
           <input type="number" name="basePrice" value={formData.basePrice} onChange={handleChange} required min="0" step="0.01" className="w-full border border-gray-300 rounded-lg px-3 py-2" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Capacité (pers.)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">CapacitÃ© (pers.)</label>
           <input type="number" name="capacity" value={formData.capacity} onChange={handleChange} required min="1" className="w-full border border-gray-300 rounded-lg px-3 py-2" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Superficie (m²)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Superficie (mÂ²)</label>
           <input type="number" name="sizeSqm" value={formData.sizeSqm} onChange={handleChange} required min="1" className="w-full border border-gray-300 rounded-lg px-3 py-2" />
         </div>
       </div>
@@ -182,7 +182,7 @@ export default function RoomEditForm({ room, locale }: { room: any | null, local
       </div>
 
       <div className="border-t border-gray-100 pt-6">
-        <label className="block text-sm font-medium text-gray-700 mb-1">Équipements (séparés par des virgules)</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Ã‰quipements (sÃ©parÃ©s par des virgules)</label>
         <input type="text" name="amenitiesString" value={formData.amenitiesString} onChange={handleChange} className="w-full border border-gray-300 rounded-lg px-3 py-2" />
       </div>
 
@@ -194,7 +194,7 @@ export default function RoomEditForm({ room, locale }: { room: any | null, local
       <div className="flex justify-end gap-3 pt-6 border-t border-gray-100">
         <Link href="/admin/rooms" className="px-6 py-2.5 text-gray-600 hover:bg-gray-100 rounded-lg font-medium transition">Annuler</Link>
         <button type="submit" disabled={loading || uploading} className="bg-emerald-700 hover:bg-emerald-800 disabled:bg-gray-400 text-white px-6 py-2.5 rounded-lg font-medium transition shadow-sm">
-          {loading ? 'Enregistrement...' : (isNew ? 'Créer la chambre' : 'Enregistrer les modifications')}
+          {loading ? 'Enregistrement...' : (isNew ? 'CrÃ©er la chambre' : 'Enregistrer les modifications')}
         </button>
       </div>
     </form>
