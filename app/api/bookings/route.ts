@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
     });
     
     if (existing) {
-      return NextResponse.json({ error: 'Cette chambre est déjà réservée pour ces dates. Veuillez en choisir d''autres.' }, { status: 409 });
+      return NextResponse.json({ error: 'Cette chambre est déjà réservée pour ces dates. Veuillez en choisir d\'autres.' }, { status: 409 });
     }
 
     const nights = Math.max(1, Math.ceil((checkOut.getTime() - checkIn.getTime()) / 86400000));
@@ -87,11 +87,15 @@ export async function POST(req: NextRequest) {
 
     const stripe = getStripe();
     const amountInCents = Math.round(total * 100);
+    
+    // On utilise le nouveau paramètre "allowed_payment_method_types"
+    const allowedTypes = data.paymentMethod === 'TWINT' ? ['twint'] : ['card'];
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountInCents,
       currency: 'chf',
       metadata: { bookingId: booking.id },
-      payment_method_types: ['card'],
+      allowed_payment_method_types: allowedTypes,
       receipt_email: data.guestEmail,
     });
 
@@ -100,8 +104,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ bookingId: booking.reference, clientSecret: paymentIntent.client_secret, total, nights });
 
   } catch (err: any) {
-    console.error('[bookings/POST] ERREUR TECHNIQUE:', err);
-    // ON AFFICHE L'ERREUR RÉELLE POUR COMPRENDRE LE PROBLÈME
+    console.error('[bookings/POST]', err);
     return NextResponse.json({ error: 'Une erreur est survenue. Veuillez réessayer.' }, { status: 500 });
   }
 }
