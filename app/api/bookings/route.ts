@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getStripe } from '@/lib/stripe';
-import { Transaction } from '@/lib/fedapay';
 import { z } from 'zod';
 
 const schema = z.object({
@@ -13,6 +12,7 @@ const schema = z.object({
   guestEmail: z.string().min(3),
   guestPhone: z.string().optional(),
   paymentMethod: z.enum(['STRIPE_CARD', 'TWINT', 'MOBILE_MONEY']),
+  promoCode: z.string().nullable().optional(),
 });
 
 export const dynamic = 'force-dynamic';
@@ -27,90 +27,45 @@ export async function POST(req: NextRequest) {
 
     const checkIn = new Date(data.checkIn);
     const checkOut = new Date(data.checkOut);
-    
     const existing = await prisma.booking.findFirst({
-      where: {
-        roomId: room.id,
-        status: { in: ['CONFIRMED', 'PENDING'] },
-        AND: [{ checkIn: { lt: checkOut } }, { checkOut: { gt: checkIn } }],
-      },
+      where: { roomId: room.id, status: { in: ['CONFIRMED', 'PENDING'] }, AND: [{ checkIn: { lt: checkOut } }, { checkOut: { gt: checkIn } }] },
     });
-    
-    if (existing) {
-      return NextResponse.json({ error: 'Cette chambre est déjà réservée pour ces dates. Veuillez en choisir d\'autres.' }, { status: 409 });
-    }
+    if (existing) return NextResponse.json({ error: 'Chambre indisponible.' }, { status: 409 });
 
     const nights = Math.max(1, Math.ceil((checkOut.getTime() - checkIn.getTime()) / 86400000));
-    const total = nights * room.basePrice;
+    let total = nights * room.basePrice;
+    let promoCodeId = null;
+    let discountApplied = 0;
 
-    const roomCode = room.slug.split('-').pop()?.substring(0, 3).toUpperCase() || 'CH';
-    let count = await prisma.booking.count({ where: { roomId: room.id } }) + 1;
-    let reference = `REF-${roomCode}-${count.toString().padStart(2, '0')}`;
-    
-    while (await prisma.booking.findUnique({ where: { reference } })) {
-      count++;
-      reference = `REF-${roomCode}-${count.toString().padStart(2, '0')}`;
+    // --- VÉRIFICATION DU CODE PROMO ---
+    if (data.promoCode) {
+      const promo = await prisma.promoCode.findUnique({ where: { code: data.promoCode.toUpperCase() } });
+      if (promo && promo.isActive) {
+        discountApplied = (total * promo.discountPercent) / 100;
+        total = total - discountApplied;
+        promoCodeId = promo.id;
+      }
     }
 
     const booking = await prisma.booking.create({
       data: {
-        reference: reference,
-        roomId: room.id,
-        guestName: data.guestName,
-        guestEmail: data.guestEmail,
-        guestPhone: data.guestPhone,
-        checkIn,
-        checkOut,
-        guests: data.guests,
-        totalAmount: total,
-        currency: 'CHF',
-        status: 'PENDING',
-        source: 'DIRECT',
-        paymentMethod: data.paymentMethod,
-        notes: 'Reservation en attente de paiement',
+        roomId: room.id, guestName: data.guestName, guestEmail: data.guestEmail, guestPhone: data.guestPhone,
+        checkIn, checkOut, guests: data.guests, totalAmount: total, currency: 'CHF',
+        status: 'PENDING', source: 'DIRECT', paymentMethod: data.paymentMethod,
+        promoCodeId, discountApplied,
       },
     });
 
-    if (data.paymentMethod === 'MOBILE_MONEY') {
-      const xofAmount = Math.floor(total * 655);
-      const transaction = await Transaction.create({
-        description: `Reservation Hotel Awaya - ${booking.reference}`,
-        amount: xofAmount,
-        currency: { iso: 'XOF' },
-        callback_url: `${process.env.NEXT_PUBLIC_SITE_URL}/fr/reservation/confirmation?booking=${booking.reference}`,
-        customer: { 
-          firstname: 'Client', 
-          lastname: 'Test', 
-          email: data.guestEmail, 
-          phone_number: { 
-            number: '', // On laisse vide pour que FedaPay demande la saisie manuelle
-            country: 'bj' 
-          } 
-        }
-      });
-      const token = await transaction.generateToken();
-      await prisma.booking.update({ where: { id: booking.id }, data: { paymentId: transaction.id.toString() } });
-      return NextResponse.json({ bookingId: booking.reference, paymentUrl: token.url, total, nights });
-    }
-
     const stripe = getStripe();
     const amountInCents = Math.round(total * 100);
-    const allowedTypes = data.paymentMethod === 'TWINT' ? ['twint'] : ['card'];
-
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: amountInCents,
-      currency: 'chf',
-      metadata: { bookingId: booking.id },
-      allowed_payment_method_types: allowedTypes,
-      receipt_email: data.guestEmail,
+      amount: amountInCents, currency: 'chf', metadata: { bookingId: booking.id }, receipt_email: data.guestEmail,
     });
 
     await prisma.booking.update({ where: { id: booking.id }, data: { paymentId: paymentIntent.id } });
 
-    return NextResponse.json({ bookingId: booking.reference, clientSecret: paymentIntent.client_secret, total, nights });
-
+    return NextResponse.json({ bookingId: booking.id, clientSecret: paymentIntent.client_secret, total, nights });
   } catch (err: any) {
-    console.error('[bookings/POST]', err);
-    return NextResponse.json({ error: 'Une erreur est survenue. Veuillez réessayer.' }, { status: 500 });
+    return NextResponse.json({ error: 'Une erreur est survenue.' }, { status: 500 });
   }
 }
