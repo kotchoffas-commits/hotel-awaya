@@ -14,17 +14,33 @@ export default function DemandePage() {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    
     try {
       const res = await fetch('/api/demandes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
+
+      // LECTURE ROBUSTE : On récupère le texte d'abord
+      const text = await res.text();
+      let data: any = {};
+      
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch (parseError) {
+        // Si ce n'est pas du JSON, c'est une page HTML d'erreur
+        console.error('Reponse non-JSON du serveur:', text.substring(0, 100));
+        throw new Error(`Erreur serveur (${res.status}). Veuillez réessayer plus tard.`);
+      }
+
+      if (!res.ok) {
+        throw new Error(data.error || `Erreur (${res.status})`);
+      }
+
       setSuccess(data.reference);
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message || 'Erreur inconnue');
     } finally {
       setLoading(false);
     }
@@ -59,7 +75,7 @@ export default function DemandePage() {
           <p className="text-gray-600 max-w-lg mx-auto">Vous préférez ne pas payer en ligne ? Envoyez-nous vos dates et nous vous confirmerons la disponibilité sous 24h.</p>
         </div>
 
-        {error && <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-xl mb-6 text-center">{error}</div>}
+        {error && <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-xl mb-6 text-center text-sm">{error}</div>}
 
         <form onSubmit={handleSubmit} className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm space-y-6">
           <div className="space-y-4">
