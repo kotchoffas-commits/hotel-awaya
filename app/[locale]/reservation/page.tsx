@@ -57,7 +57,8 @@ export default async function ReservationPage({
         </h1>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <ReservationForm roomSlug={room.slug} checkIn={checkIn} checkOut={checkOut} guests={guests} />
+            <ReservationForm roomSlug={room.slug} checkIn={checkIn} checkOut={checkOut} guests={guests}
+              basePrice={room.basePrice} />
           </div>
           <aside className="lg:col-span-1">
             <div className="sticky top-24 bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
