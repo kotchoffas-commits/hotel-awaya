@@ -58,6 +58,7 @@ export type BookingMinAggregateOutputType = {
   notes: string | null
   promoCodeId: string | null
   discountApplied: number | null
+  isNotified: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -82,6 +83,7 @@ export type BookingMaxAggregateOutputType = {
   notes: string | null
   promoCodeId: string | null
   discountApplied: number | null
+  isNotified: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -106,6 +108,7 @@ export type BookingCountAggregateOutputType = {
   notes: number
   promoCodeId: number
   discountApplied: number
+  isNotified: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -144,6 +147,7 @@ export type BookingMinAggregateInputType = {
   notes?: true
   promoCodeId?: true
   discountApplied?: true
+  isNotified?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -168,6 +172,7 @@ export type BookingMaxAggregateInputType = {
   notes?: true
   promoCodeId?: true
   discountApplied?: true
+  isNotified?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -192,6 +197,7 @@ export type BookingCountAggregateInputType = {
   notes?: true
   promoCodeId?: true
   discountApplied?: true
+  isNotified?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -303,6 +309,7 @@ export type BookingGroupByOutputType = {
   notes: string | null
   promoCodeId: string | null
   discountApplied: number | null
+  isNotified: boolean
   createdAt: Date
   updatedAt: Date
   _count: BookingCountAggregateOutputType | null
@@ -350,6 +357,7 @@ export type BookingWhereInput = {
   notes?: Prisma.StringNullableFilter<"Booking"> | string | null
   promoCodeId?: Prisma.StringNullableFilter<"Booking"> | string | null
   discountApplied?: Prisma.FloatNullableFilter<"Booking"> | number | null
+  isNotified?: Prisma.BoolFilter<"Booking"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
@@ -376,6 +384,7 @@ export type BookingOrderByWithRelationInput = {
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   promoCodeId?: Prisma.SortOrderInput | Prisma.SortOrder
   discountApplied?: Prisma.SortOrderInput | Prisma.SortOrder
+  isNotified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   room?: Prisma.RoomOrderByWithRelationInput
@@ -405,6 +414,7 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   notes?: Prisma.StringNullableFilter<"Booking"> | string | null
   promoCodeId?: Prisma.StringNullableFilter<"Booking"> | string | null
   discountApplied?: Prisma.FloatNullableFilter<"Booking"> | number | null
+  isNotified?: Prisma.BoolFilter<"Booking"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
@@ -431,6 +441,7 @@ export type BookingOrderByWithAggregationInput = {
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   promoCodeId?: Prisma.SortOrderInput | Prisma.SortOrder
   discountApplied?: Prisma.SortOrderInput | Prisma.SortOrder
+  isNotified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BookingCountOrderByAggregateInput
@@ -463,6 +474,7 @@ export type BookingScalarWhereWithAggregatesInput = {
   notes?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
   promoCodeId?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
   discountApplied?: Prisma.FloatNullableWithAggregatesFilter<"Booking"> | number | null
+  isNotified?: Prisma.BoolWithAggregatesFilter<"Booking"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
 }
@@ -485,6 +497,7 @@ export type BookingCreateInput = {
   paymentId?: string | null
   notes?: string | null
   discountApplied?: number | null
+  isNotified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   room: Prisma.RoomCreateNestedOneWithoutBookingsInput
@@ -511,6 +524,7 @@ export type BookingUncheckedCreateInput = {
   notes?: string | null
   promoCodeId?: string | null
   discountApplied?: number | null
+  isNotified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -533,6 +547,7 @@ export type BookingUpdateInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  isNotified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   room?: Prisma.RoomUpdateOneRequiredWithoutBookingsNestedInput
@@ -559,6 +574,7 @@ export type BookingUncheckedUpdateInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   promoCodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  isNotified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -583,6 +599,7 @@ export type BookingCreateManyInput = {
   notes?: string | null
   promoCodeId?: string | null
   discountApplied?: number | null
+  isNotified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -605,6 +622,7 @@ export type BookingUpdateManyMutationInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  isNotified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -629,6 +647,7 @@ export type BookingUncheckedUpdateManyInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   promoCodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  isNotified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -663,6 +682,7 @@ export type BookingCountOrderByAggregateInput = {
   notes?: Prisma.SortOrder
   promoCodeId?: Prisma.SortOrder
   discountApplied?: Prisma.SortOrder
+  isNotified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -693,6 +713,7 @@ export type BookingMaxOrderByAggregateInput = {
   notes?: Prisma.SortOrder
   promoCodeId?: Prisma.SortOrder
   discountApplied?: Prisma.SortOrder
+  isNotified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -717,6 +738,7 @@ export type BookingMinOrderByAggregateInput = {
   notes?: Prisma.SortOrder
   promoCodeId?: Prisma.SortOrder
   discountApplied?: Prisma.SortOrder
+  isNotified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -849,6 +871,7 @@ export type BookingCreateWithoutRoomInput = {
   paymentId?: string | null
   notes?: string | null
   discountApplied?: number | null
+  isNotified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   promoCode?: Prisma.PromoCodeCreateNestedOneWithoutBookingsInput
@@ -873,6 +896,7 @@ export type BookingUncheckedCreateWithoutRoomInput = {
   notes?: string | null
   promoCodeId?: string | null
   discountApplied?: number | null
+  isNotified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -926,6 +950,7 @@ export type BookingScalarWhereInput = {
   notes?: Prisma.StringNullableFilter<"Booking"> | string | null
   promoCodeId?: Prisma.StringNullableFilter<"Booking"> | string | null
   discountApplied?: Prisma.FloatNullableFilter<"Booking"> | number | null
+  isNotified?: Prisma.BoolFilter<"Booking"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
 }
@@ -948,6 +973,7 @@ export type BookingCreateWithoutPromoCodeInput = {
   paymentId?: string | null
   notes?: string | null
   discountApplied?: number | null
+  isNotified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   room: Prisma.RoomCreateNestedOneWithoutBookingsInput
@@ -972,6 +998,7 @@ export type BookingUncheckedCreateWithoutPromoCodeInput = {
   paymentId?: string | null
   notes?: string | null
   discountApplied?: number | null
+  isNotified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1021,6 +1048,7 @@ export type BookingCreateManyRoomInput = {
   notes?: string | null
   promoCodeId?: string | null
   discountApplied?: number | null
+  isNotified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1043,6 +1071,7 @@ export type BookingUpdateWithoutRoomInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  isNotified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   promoCode?: Prisma.PromoCodeUpdateOneWithoutBookingsNestedInput
@@ -1067,6 +1096,7 @@ export type BookingUncheckedUpdateWithoutRoomInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   promoCodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  isNotified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1090,6 +1120,7 @@ export type BookingUncheckedUpdateManyWithoutRoomInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   promoCodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  isNotified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1113,6 +1144,7 @@ export type BookingCreateManyPromoCodeInput = {
   paymentId?: string | null
   notes?: string | null
   discountApplied?: number | null
+  isNotified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1135,6 +1167,7 @@ export type BookingUpdateWithoutPromoCodeInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  isNotified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   room?: Prisma.RoomUpdateOneRequiredWithoutBookingsNestedInput
@@ -1159,6 +1192,7 @@ export type BookingUncheckedUpdateWithoutPromoCodeInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  isNotified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1182,6 +1216,7 @@ export type BookingUncheckedUpdateManyWithoutPromoCodeInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  isNotified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1208,6 +1243,7 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   notes?: boolean
   promoCodeId?: boolean
   discountApplied?: boolean
+  isNotified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
@@ -1234,6 +1270,7 @@ export type BookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   notes?: boolean
   promoCodeId?: boolean
   discountApplied?: boolean
+  isNotified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
@@ -1260,6 +1297,7 @@ export type BookingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   notes?: boolean
   promoCodeId?: boolean
   discountApplied?: boolean
+  isNotified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
@@ -1286,11 +1324,12 @@ export type BookingSelectScalar = {
   notes?: boolean
   promoCodeId?: boolean
   discountApplied?: boolean
+  isNotified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reference" | "roomId" | "guestName" | "guestEmail" | "guestPhone" | "checkIn" | "checkOut" | "guests" | "totalAmount" | "currency" | "status" | "source" | "externalId" | "paymentMethod" | "paymentId" | "notes" | "promoCodeId" | "discountApplied" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
+export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reference" | "roomId" | "guestName" | "guestEmail" | "guestPhone" | "checkIn" | "checkOut" | "guests" | "totalAmount" | "currency" | "status" | "source" | "externalId" | "paymentMethod" | "paymentId" | "notes" | "promoCodeId" | "discountApplied" | "isNotified" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
 export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   promoCode?: boolean | Prisma.Booking$promoCodeArgs<ExtArgs>
@@ -1330,6 +1369,7 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     notes: string | null
     promoCodeId: string | null
     discountApplied: number | null
+    isNotified: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["booking"]>
@@ -1776,6 +1816,7 @@ export interface BookingFieldRefs {
   readonly notes: Prisma.FieldRef<"Booking", 'String'>
   readonly promoCodeId: Prisma.FieldRef<"Booking", 'String'>
   readonly discountApplied: Prisma.FieldRef<"Booking", 'Float'>
+  readonly isNotified: Prisma.FieldRef<"Booking", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Booking", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Booking", 'DateTime'>
 }

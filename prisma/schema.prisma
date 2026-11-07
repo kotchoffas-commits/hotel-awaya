@@ -48,10 +48,27 @@ model Booking {
   promoCodeId   String?
   promoCode     PromoCode?    @relation(fields: [promoCodeId], references: [id])
   discountApplied Float?
+  isNotified    Boolean       @default(false)
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 
   @@index([checkIn, checkOut])
+}
+
+model BookingRequest {
+  id          String   @id @default(cuid())
+  reference   String   @unique
+  guestName   String
+  guestEmail  String
+  guestPhone  String?
+  checkIn     DateTime
+  checkOut    DateTime
+  guests      Int
+  roomSlug    String?
+  status      String   @default("PENDING")
+  isNotified  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model PromoCode {

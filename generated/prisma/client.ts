@@ -52,6 +52,11 @@ export type Room = Prisma.RoomModel
  */
 export type Booking = Prisma.BookingModel
 /**
+ * Model BookingRequest
+ * 
+ */
+export type BookingRequest = Prisma.BookingRequestModel
+/**
  * Model PromoCode
  * 
  */
