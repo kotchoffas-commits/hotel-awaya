@@ -73,12 +73,13 @@ export default async function AdminDashboardPage({
                 <th className="px-6 py-4 font-medium text-gray-900 w-1/5">Dates</th>
                 <th className="px-6 py-4 font-medium text-gray-900 w-1/6">Statut</th>
                 <th className="px-6 py-4 font-medium text-gray-900 text-right w-1/6">Total</th>
+                <th className="px-6 py-4 font-medium text-gray-900 text-center w-1/12 no-print">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {bookings.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-gray-500">
+                  <td colSpan={6} className="px-6 py-8 text-center text-gray-500">
                     Aucune réservation pour le moment.
                   </td>
                 </tr>
@@ -107,6 +108,11 @@ export default async function AdminDashboardPage({
                     </td>
                     <td className="px-6 py-4 text-right font-medium text-emerald-700">
                       {booking.totalAmount} CHF
+                    </td>
+                    <td className="px-6 py-4 text-center no-print">
+                      <a href={`/${locale}/admin/bookings/${booking.id}/print`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center p-2 text-gray-500 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg transition" title="Imprimer la fiche">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+                      </a>
                     </td>
                   </tr>
                 ))
