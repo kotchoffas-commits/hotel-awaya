@@ -17,6 +17,7 @@ export default function Header() {
     { href: '/galerie', label: t('gallery') },
     { href: '/avis', label: t('reviews') },
     { href: '/faq', label: t('faq') },
+    { href: '/demande', label: 'Demande de dispo' }
   ];
 
   return (
@@ -47,10 +48,10 @@ export default function Header() {
           {/* ACTIONS DESKTOP (à droite) */}
           <div className="hidden lg:flex items-center gap-4">
             <LocaleSwitcher />
-            <Link
-              href="/reservation"
-              className="bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-medium px-4 py-2 rounded-lg transition shadow-sm"
-            >
+            <Link href="/demande" className="text-emerald-700 border border-emerald-200 hover:bg-emerald-50 text-sm font-medium px-4 py-2 rounded-lg transition shadow-sm">
+              Demande
+            </Link>
+            <Link href="/reservation" className="bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-medium px-4 py-2 rounded-lg transition shadow-sm">
               {t('book')}
             </Link>
           </div>

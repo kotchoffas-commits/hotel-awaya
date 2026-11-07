@@ -100,11 +100,11 @@ export default async function RoomDetailPage({
                 <span className="text-sm text-gray-400">/ {t('perNight')}</span>
               </div>
               
-              <Link
-                href={`/reservation?room=${room.slug}`}
-                className="block w-full text-center bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-6 py-4 rounded-xl transition shadow-lg shadow-emerald-700/30"
-              >
+              <Link href={`/reservation?room=${room.slug}`} className="block w-full text-center bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-6 py-4 rounded-xl transition shadow-lg shadow-emerald-700/30 mb-3">
                 {t('bookThisRoom')}
+              </Link>
+              <Link href="/demande" className="block w-full text-center bg-white border-2 border-emerald-700 text-emerald-700 hover:bg-emerald-50 font-medium px-6 py-3 rounded-xl transition">
+                Faire une demande de dispo
               </Link>
               
               <p className="text-xs text-center text-gray-400 mt-4">
