@@ -1,6 +1,7 @@
 import Hero from '@/components/sections/Hero';
-import FeaturedRooms from '@/components/sections/FeaturedRooms';
 import WhyUs from '@/components/sections/WhyUs';
+import FeaturedRooms from '@/components/sections/FeaturedRooms';
+import Testimonials from '@/components/sections/Testimonials';
 
 export default function HomePage() {
   return (
@@ -8,6 +9,7 @@ export default function HomePage() {
       <Hero />
       <WhyUs />
       <FeaturedRooms />
+      <Testimonials />
     </>
   );
 }

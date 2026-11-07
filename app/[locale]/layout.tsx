@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import MobileFloatingCTA from '@/components/layout/MobileFloatingCTA';
 import { Jost } from 'next/font/google';
 import '../globals.css';
 
@@ -35,11 +36,12 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={jost.variable}>
-      <body className="min-h-screen bg-white text-gray-900 antialiased flex flex-col font-sans">
+      <body className="min-h-screen bg-white text-gray-900 antialiased flex flex-col font-sans pb-20 md:pb-0">
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          <MobileFloatingCTA />
         </NextIntlClientProvider>
       </body>
     </html>
