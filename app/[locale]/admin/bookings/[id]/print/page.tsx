@@ -19,39 +19,25 @@ export default async function PrintBookingPage({ params }: { params: Promise<{ i
   if (!booking) notFound();
 
   const nights = Math.max(1, Math.round((booking.checkOut.getTime() - booking.checkIn.getTime()) / 86400000));
+  const discount = booking.discountApplied || 0;
+  const baseTotal = booking.totalAmount + discount; // Prix sans la réduction
+  const finalTotal = booking.totalAmount; // Prix final
 
   return (
     <div className="bg-gray-100 min-h-screen text-black p-4 md:p-8 flex justify-center items-start">
-      {/* 
-        RÈGLES CSS D'IMPRESSION : 
-        - Cache les menus
-        - Force la couleur de fond
-        - Empêche les sauts de page
-      */}
       <style>{`
         @media print {
           header, footer, nav, .no-print { display: none !important; }
           body { background: white !important; margin: 0 !important; padding: 0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           main { padding: 0 !important; margin: 0 !important; }
-          .invoice-container {
-            box-shadow: none !important;
-            border: none !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            min-height: auto !important;
-            page-break-inside: avoid;
-          }
+          .invoice-container { box-shadow: none !important; border: none !important; padding: 0 !important; margin: 0 !important; width: 100% !important; max-width: 100% !important; min-height: auto !important; page-break-inside: avoid; }
           .page-break-avoid { page-break-inside: avoid; }
           @page { size: A4 portrait; margin: 1cm; }
         }
       `}</style>
 
-      {/* Le conteneur de la facture (sans min-height forcé) */}
       <div className="invoice-container w-full max-w-[21cm] bg-white shadow-2xl p-8 md:p-10 flex flex-col">
         
-        {/* En-tête Facture */}
         <div className="flex justify-between items-start border-b-4 border-emerald-900 pb-4 mb-6 page-break-avoid">
           <div>
             <h1 className="text-2xl font-serif font-bold text-emerald-900 uppercase tracking-widest">Hôtel Awaya Colline 132</h1>
@@ -68,7 +54,6 @@ export default async function PrintBookingPage({ params }: { params: Promise<{ i
           </div>
         </div>
 
-        {/* Infos Client et Séjour */}
         <div className="grid grid-cols-2 gap-8 mb-6 page-break-avoid">
           <div>
             <h3 className="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 border-b border-gray-200 pb-1">Facturé à</h3>
@@ -90,7 +75,6 @@ export default async function PrintBookingPage({ params }: { params: Promise<{ i
           </div>
         </div>
 
-        {/* Tableau des montants */}
         <div className="mb-6 page-break-avoid">
           <table className="w-full text-sm border-collapse">
             <thead>
@@ -109,23 +93,29 @@ export default async function PrintBookingPage({ params }: { params: Promise<{ i
                 </td>
                 <td className="p-3 text-right">{booking.room.basePrice}.00</td>
                 <td className="p-3 text-center">{nights}</td>
-                <td className="p-3 text-right">{booking.totalAmount}.00</td>
+                <td className="p-3 text-right">{baseTotal.toFixed(2)}</td>
               </tr>
+              {discount > 0 && (
+                <tr className="text-amber-700 bg-amber-50">
+                  <td colSpan={3} className="p-3 font-medium">
+                    Réduction appliquée {booking.promoCode ? `(Code: ${booking.promoCode.code})` : ''}
+                  </td>
+                  <td className="p-3 text-right font-medium">-{discount.toFixed(2)}</td>
+                </tr>
+              )}
             </tbody>
             <tfoot>
               <tr>
                 <td colSpan={3} className="p-4 text-right font-bold text-gray-800">TOTAL À PAYER</td>
-                <td className="p-4 text-right font-bold text-xl text-emerald-900 bg-emerald-50 rounded-br-lg">{booking.totalAmount}.00 CHF</td>
+                <td className="p-4 text-right font-bold text-xl text-emerald-900 bg-emerald-50 rounded-br-lg">{finalTotal.toFixed(2)} CHF</td>
               </tr>
             </tfoot>
           </table>
         </div>
 
-        {/* Pied de facture */}
-        <div className="mt-8 pt-4 text-center text-xs text-gray-500 border-t border-gray-200 page-break-avoid">
+        <div className="mt-8 pt-4 text-center text-xs text-gray-500 border-t border-gray-200 page-break-before-avoid">
           <p className="font-bold text-gray-700 mb-1">Merci de votre confiance.</p>
           <p>Cette facture tient lieu de confirmation de réservation.</p>
-          <p>Hôtel Awaya Colline 132 - RCCM : [À INSÉRER] - IFU : [À INSÉRER]</p>
         </div>
       </div>
     </div>
