@@ -16,7 +16,6 @@ export default function BookingRequestActions({ requestId, currentStatus, guestE
       });
       if (res.ok) {
         setStatus(newStatus);
-        // On rafraîchit la page après 1 seconde pour laisser le temps à l'email de partir
         setTimeout(() => window.location.reload(), 1000);
       }
     } catch (e) {
@@ -27,13 +26,13 @@ export default function BookingRequestActions({ requestId, currentStatus, guestE
 
   return (
     <div className="flex flex-col gap-2 w-full md:w-auto">
-      <label className="text-xs font-bold text-gray-500 uppercase">Prendre une décision :</label>
+      <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Décision :</label>
       <div className="relative">
         <select 
           value={status} 
           onChange={(e) => handleAction(e.target.value)}
           disabled={loading}
-          className={`w-full border rounded-lg px-4 py-2 text-sm font-medium focus:ring-2 outline-none appearance-none cursor-pointer ${
+          className={`w-full border rounded-lg px-4 py-2.5 text-sm font-bold focus:ring-2 outline-none appearance-none cursor-pointer transition-colors ${
             status === 'APPROVED' ? 'bg-emerald-50 border-emerald-300 text-emerald-800' :
             status === 'REJECTED' ? 'bg-red-50 border-red-300 text-red-800' :
             status === 'WAITLIST' ? 'bg-amber-50 border-amber-300 text-amber-800' :
@@ -42,12 +41,12 @@ export default function BookingRequestActions({ requestId, currentStatus, guestE
           }`}
         >
           <option value="PENDING" disabled>En attente de traitement...</option>
-          <option value="APPROVED">✅ Accepter (Disponible)</option>
-          <option value="REJECTED">❌ Refuser (Indisponible)</option>
+          <option value="APPROVED">✅ Accepter (Chambre Disponible)</option>
+          <option value="REJECTED">❌ Refuser (Chambre Indisponible)</option>
           <option value="WAITLIST">⏳ Mettre en liste d'attente</option>
           <option value="CONTACTED">📞 Client contacté (En cours)</option>
         </select>
-        {loading && <span className="absolute right-8 top-2.5 text-xs text-gray-500">Envoi...</span>}
+        {loading && <span className="absolute right-8 top-3 text-xs text-gray-500">Envoi...</span>}
       </div>
     </div>
   );
