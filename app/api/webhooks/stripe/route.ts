@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-export const dynamic = 'force-dynamic';
 import { prisma } from '@/lib/prisma';
-export const dynamic = 'force-dynamic';
 import { getStripe } from '@/lib/stripe';
-export const dynamic = 'force-dynamic';
 import { sendConfirmationEmail } from '@/lib/email';
-export const dynamic = 'force-dynamic';
 import Stripe from 'stripe';
+
 export const dynamic = 'force-dynamic';
+
 
 export async function POST(req: NextRequest) {
   const body = await req.text();

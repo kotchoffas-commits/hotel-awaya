@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-export const dynamic = 'force-dynamic';
 import { prisma } from '@/lib/prisma';
-export const dynamic = 'force-dynamic';
 import { Webhook } from 'fedapay';
+
 export const dynamic = 'force-dynamic';
+
 
 export async function POST(req: NextRequest) {
   const rawBody = await req.text();
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
 
   let event: any;
   try {
-    // VÃ©rification de la signature avec le corps brut
+    // VÃƒÂ©rification de la signature avec le corps brut
     event = Webhook.constructEvent(rawBody, sig, endpointSecret);
   } catch (err: any) {
     console.error('[WEBHOOK FEDAPAY] Signature invalide:', err.message);
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
           where: { id: booking.id },
           data: { status: 'CONFIRMED' }
         });
-        console.log(`[WEBHOOK FEDAPAY] RÃ©servation ${booking.id} confirmÃ©e !`);
+        console.log(`[WEBHOOK FEDAPAY] RÃƒÂ©servation ${booking.id} confirmÃƒÂ©e !`);
       }
     }
   }
