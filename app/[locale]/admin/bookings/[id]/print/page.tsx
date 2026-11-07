@@ -13,7 +13,7 @@ export default async function PrintBookingPage({ params }: { params: Promise<{ i
 
   const booking = await prisma.booking.findUnique({
     where: { id },
-    include: { room: true },
+    include: { room: true, promoCode: true },
   });
 
   if (!booking) notFound();

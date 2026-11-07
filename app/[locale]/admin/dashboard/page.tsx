@@ -21,7 +21,7 @@ export default async function AdminDashboardPage({
 
   const bookings = await prisma.booking.findMany({
     orderBy: { createdAt: 'desc' },
-    include: { room: true },
+    include: { room: true, promoCode: true },
   });
 
   const totalRevenue = bookings
@@ -110,8 +110,15 @@ export default async function AdminDashboardPage({
                     <td className="px-6 py-4">
                       <BookingStatusActions bookingId={booking.id} currentStatus={booking.status} />
                     </td>
-                    <td className="px-6 py-4 text-right font-medium text-emerald-700">
-                      {booking.totalAmount} CHF
+                    <td className="px-6 py-4 text-right">
+                      <div className="font-medium text-emerald-700">
+                        {booking.totalAmount} CHF
+                      </div>
+                      {booking.discountApplied && booking.discountApplied > 0 && (
+                        <div className="text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full inline-block mt-1">
+                          Promo : -{booking.discountApplied.toFixed(2)} CHF
+                        </div>
+                      )}
                     </td>
                     <td className="px-6 py-4 text-center no-print">
                       <a href={`/${locale}/admin/bookings/${booking.id}/print`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center p-2 text-gray-500 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg transition" title="Imprimer la fiche">
