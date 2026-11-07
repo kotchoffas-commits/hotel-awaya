@@ -4,20 +4,16 @@ import { prisma } from '@/lib/prisma';
 import { Link } from '@/i18n/navigation';
 import BookingStatusActions from '@/components/admin/BookingStatusActions';
 import CopyButton from '@/components/ui/CopyButton';
-import NotificationSystem from '@/components/admin/NotificationSystem';
+import NotificationBell from '@/components/admin/NotificationBell';
 
-export default async function AdminDashboardPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export const dynamic = 'force-dynamic';
+
+export default async function AdminDashboardPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const cookieStore = await cookies();
   const session = cookieStore.get('admin_session');
 
-  if (!session || session.value !== 'true') {
-    redirect(`/${locale}/admin/login`);
-  }
+  if (!session || session.value !== 'true') redirect(`/${locale}/admin/login`);
 
   const bookings = await prisma.booking.findMany({
     orderBy: { createdAt: 'desc' },
@@ -31,21 +27,13 @@ export default async function AdminDashboardPage({
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-8">
-        <h1 className="font-serif text-3xl font-bold text-emerald-900">
-          Tableau de bord
-        </h1>
+        <h1 className="font-serif text-3xl font-bold text-emerald-900">Tableau de bord</h1>
         <div className="flex flex-wrap items-center gap-3 text-sm">
-          <Link href="/admin/rooms" className="bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium hover:bg-emerald-800 transition shadow-sm">
-            Gérer les chambres
-          </Link>
-          <Link href="/" className="text-gray-500 hover:text-emerald-700 underline px-2">
-            Retour au site
-          </Link>
+          <Link href="/admin/rooms" className="bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium hover:bg-emerald-800 transition shadow-sm">Gérer les chambres</Link>
+          <Link href="/" className="text-gray-500 hover:text-emerald-700 underline px-2">Retour au site</Link>
           <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-2 py-1 shadow-sm">
-            <NotificationSystem />
-            <a href={`/api/admin/logout?locale=${locale}`} className="text-red-600 hover:text-red-800 text-sm font-medium px-2">
-              Déconnexion
-            </a>
+            <NotificationBell />
+            <a href={`/api/admin/logout?locale=${locale}`} className="text-red-600 hover:text-red-800 text-sm font-medium px-2">Déconnexion</a>
           </div>
         </div>
       </div>
@@ -61,9 +49,7 @@ export default async function AdminDashboardPage({
         </div>
         <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
           <p className="text-sm text-gray-500 mb-1">En attente de paiement</p>
-          <p className="text-3xl font-bold text-yellow-600">
-            {bookings.filter((b) => b.status === 'PENDING').length}
-          </p>
+          <p className="text-3xl font-bold text-yellow-600">{bookings.filter((b) => b.status === 'PENDING').length}</p>
         </div>
       </div>
 
@@ -82,37 +68,25 @@ export default async function AdminDashboardPage({
             </thead>
             <tbody className="divide-y divide-gray-100">
               {bookings.length === 0 ? (
-                <tr>
-                  <td colSpan={6} className="px-6 py-8 text-center text-gray-500">
-                    Aucune réservation pour le moment.
-                  </td>
-                </tr>
+                <tr><td colSpan={6} className="px-6 py-8 text-center text-gray-500">Aucune réservation pour le moment.</td></tr>
               ) : (
                 bookings.map((booking) => (
                   <tr key={booking.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded">
-                          {booking.reference || booking.id.slice(0, 8)}
-                        </span>
+                        <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded">{booking.reference || booking.id.slice(0, 8)}</span>
                         <CopyButton text={booking.reference || booking.id} />
                       </div>
                       <div className="font-medium text-gray-900">{booking.guestName}</div>
                       <div className="text-gray-500 text-xs">{booking.guestEmail}</div>
                     </td>
-                    <td className="px-6 py-4 text-gray-600">
-                      {locale === 'fr' ? booking.room.nameFr : booking.room.nameEn}
-                    </td>
+                    <td className="px-6 py-4 text-gray-600">{locale === 'fr' ? booking.room.nameFr : booking.room.nameEn}</td>
                     <td className="px-6 py-4 text-gray-600 text-xs">
                       <span className="block">Arrivée: {booking.checkIn.toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-GB')}</span>
                       <span className="block">Départ: {booking.checkOut.toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-GB')}</span>
                     </td>
-                    <td className="px-6 py-4">
-                      <BookingStatusActions bookingId={booking.id} currentStatus={booking.status} />
-                    </td>
-                    <td className="px-6 py-4 text-right font-medium text-emerald-700">
-                      {booking.totalAmount} CHF
-                    </td>
+                    <td className="px-6 py-4"><BookingStatusActions bookingId={booking.id} currentStatus={booking.status} /></td>
+                    <td className="px-6 py-4 text-right font-medium text-emerald-700">{booking.totalAmount} CHF</td>
                     <td className="px-6 py-4 text-center no-print">
                       <a href={`/${locale}/admin/bookings/${booking.id}/print`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center p-2 text-gray-500 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg transition" title="Imprimer la fiche">
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
