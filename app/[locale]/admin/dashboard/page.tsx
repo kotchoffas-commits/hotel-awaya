@@ -4,7 +4,7 @@ import { prisma } from '@/lib/prisma';
 import { Link } from '@/i18n/navigation';
 import BookingStatusActions from '@/components/admin/BookingStatusActions';
 import CopyButton from '@/components/ui/CopyButton';
-import NotificationBell from '@/components/admin/NotificationBell';
+import NotificationSystem from '@/components/admin/NotificationSystem';
 
 export default async function AdminDashboardPage({
   params,
@@ -42,7 +42,7 @@ export default async function AdminDashboardPage({
             Retour au site
           </Link>
           <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-2 py-1 shadow-sm">
-            <NotificationBell />
+            <NotificationSystem />
             <a href={`/api/admin/logout?locale=${locale}`} className="text-red-600 hover:text-red-800 text-sm font-medium px-2">
               Déconnexion
             </a>
