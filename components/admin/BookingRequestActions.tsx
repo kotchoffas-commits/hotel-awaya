@@ -16,6 +16,7 @@ export default function BookingRequestActions({ requestId, currentStatus, guestE
       });
       if (res.ok) {
         setStatus(newStatus);
+        // On rafraîchit la page après 1 seconde pour voir le nouveau badge
         setTimeout(() => window.location.reload(), 1000);
       }
     } catch (e) {
@@ -25,7 +26,7 @@ export default function BookingRequestActions({ requestId, currentStatus, guestE
   };
 
   return (
-    <div className="flex flex-col gap-2 w-full md:w-auto">
+    <div className="flex flex-col gap-2 w-full md:w-auto min-w-[220px]">
       <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Décision :</label>
       <div className="relative">
         <select 
@@ -46,7 +47,7 @@ export default function BookingRequestActions({ requestId, currentStatus, guestE
           <option value="WAITLIST">⏳ Mettre en liste d'attente</option>
           <option value="CONTACTED">📞 Client contacté (En cours)</option>
         </select>
-        {loading && <span className="absolute right-8 top-3 text-xs text-gray-500">Envoi...</span>}
+        {loading && <span className="absolute right-8 top-3 text-xs text-gray-500 animate-pulse">Envoi...</span>}
       </div>
     </div>
   );
