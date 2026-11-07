@@ -39,11 +39,8 @@ export async function POST(req: NextRequest) {
       },
     });
     
-    // --- DEBUG : On affiche l'ID de la réservation qui bloque ---
     if (existing) {
-      return NextResponse.json({ 
-        error: `BLOQUÉ PAR : ${existing.guestName} (Réf: ${existing.reference || existing.id}). Dates: ${existing.checkIn.toLocaleDateString()} au ${existing.checkOut.toLocaleDateString()}` 
-      }, { status: 409 });
+      return NextResponse.json({ error: 'Cette chambre est déjà réservée pour ces dates. Veuillez en choisir d\'autres.' }, { status: 409 });
     }
 
     const nights = Math.max(1, Math.ceil((checkOut.getTime() - checkIn.getTime()) / 86400000));
@@ -106,6 +103,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ bookingId: booking.reference, clientSecret: paymentIntent.client_secret, total, nights });
 
   } catch (err: any) {
+    console.error('[bookings/POST]', err);
     return NextResponse.json({ error: 'Une erreur est survenue. Veuillez réessayer.' }, { status: 500 });
   }
 }
