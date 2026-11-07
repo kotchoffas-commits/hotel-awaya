@@ -1,12 +1,13 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Link } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation'; // <-- Utilisation de next-intl
 import DecisionModal from '@/components/admin/DecisionModal';
 
 export default function NotificationsPage() {
   const [bookings, setBookings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedBooking, setSelectedBooking] = useState<any | null>(null);
+  const router = useRouter();
 
   const fetchPending = async () => {
     try {
@@ -24,7 +25,7 @@ export default function NotificationsPage() {
 
   useEffect(() => {
     fetchPending();
-    // Dès qu'on ouvre la page, on marque tout comme lu
+    // On marque comme lu dès l'arrivée sur la page
     fetch('/api/admin/notifications/read', { method: 'POST' });
   }, []);
 
@@ -35,13 +36,15 @@ export default function NotificationsPage() {
           <h1 className="font-serif text-3xl font-bold text-emerald-900">Centre de notifications</h1>
           <p className="text-gray-500 text-sm mt-1">Réservations en attente de traitement</p>
         </div>
-        <Link href="/admin/dashboard" className="text-sm font-medium text-gray-600 hover:text-emerald-700 bg-gray-100 px-4 py-2 rounded-lg">← Retour au tableau de bord</Link>
+        <Link href="/admin/dashboard" className="text-sm font-medium text-gray-600 hover:text-emerald-700 bg-gray-100 px-4 py-2 rounded-lg">
+          ← Retour au tableau de bord
+        </Link>
       </div>
 
       {loading ? (
         <p className="text-center text-gray-500">Chargement...</p>
       ) : bookings.length === 0 ? (
-        <div className="text-center py-20 bg-white rounded-2xl border border-gray-100">
+        <div className="text-center py-20 bg-white rounded-2xl border border-gray-100 shadow-sm">
           <div className="w-16 h-16 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
           </div>
@@ -60,14 +63,20 @@ export default function NotificationsPage() {
                 <h3 className="font-bold text-lg text-gray-900">{booking.guestName}</h3>
                 <p className="text-sm text-gray-600">{booking.room.nameFr} • {new Date(booking.checkIn).toLocaleDateString('fr-FR')} au {new Date(booking.checkOut).toLocaleDateString('fr-FR')}</p>
               </div>
-              <button onClick={() => setSelectedBooking(booking)} className="bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-5 py-2.5 rounded-lg transition shadow-sm whitespace-nowrap">Ouvrir le dossier</button>
+              <button onClick={() => setSelectedBooking(booking)} className="bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-5 py-2.5 rounded-lg transition shadow-sm whitespace-nowrap">
+                Ouvrir le dossier
+              </button>
             </div>
           ))}
         </div>
       )}
 
       {selectedBooking && (
-        <DecisionModal booking={selectedBooking} roomName={selectedBooking.room.nameFr} onClose={() => { setSelectedBooking(null); fetchPending(); }} />
+        <DecisionModal 
+          booking={selectedBooking} 
+          roomName={selectedBooking.room.nameFr} 
+          onClose={() => { setSelectedBooking(null); fetchPending(); router.refresh(); }} 
+        />
       )}
     </div>
   );
