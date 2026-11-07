@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import DeveloperInfo from '@/components/ui/DeveloperInfo';
 
 export default function Footer() {
   const t = useTranslations('footer');
@@ -48,15 +49,9 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Développeur</h4>
-            <div className="text-sm space-y-2">
-              <p className="font-bold text-white">Kotchoffa Serge</p>
-              <p className="text-xs text-emerald-500">Développeur Web & Solutions IA</p>
-              <div className="pt-2 space-y-1">
-                <a href="https://wa.me/2290195123224" target="_blank" className="block hover:text-white transition">WhatsApp : +229 01 95 12 32 24</a>
-                <a href="mailto:Kotchoffas@outlook.com" className="block hover:text-white transition">Kotchoffas@outlook.com</a>
-              </div>
-            </div>
+            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">À propos du site</h4>
+            <p className="text-sm mb-4">Ce site a été conçu et développé sur mesure pour l'Hôtel Awaya Colline 132.</p>
+            <DeveloperInfo />
           </div>
         </div>
 
