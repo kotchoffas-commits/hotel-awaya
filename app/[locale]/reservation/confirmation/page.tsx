@@ -4,8 +4,7 @@ import { prisma } from '@/lib/prisma';
 import CopyButton from '@/components/ui/CopyButton';
 
 export default async function ConfirmationPage({
-  params,
-  searchParams,
+  params, searchParams,
 }: {
   params: Promise<{ locale: string }>;
   searchParams: Promise<{ booking?: string }>;
@@ -15,14 +14,7 @@ export default async function ConfirmationPage({
   const t = await getTranslations('booking');
 
   if (!sp.booking) {
-    return (
-      <div className="max-w-3xl mx-auto px-4 py-16 text-center">
-        <p className="text-gray-600 mb-4">{"R\u00e9servation introuvable."}</p>
-        <Link href="/chambres" className="text-emerald-700 underline">
-          {"Retour aux chambres"}
-        </Link>
-      </div>
-    );
+    return <div className="min-h-screen flex items-center justify-center p-4"><p className="text-gray-600">Réservation introuvable.</p></div>;
   }
 
   const booking = await prisma.booking.findFirst({
@@ -31,84 +23,59 @@ export default async function ConfirmationPage({
   });
 
   if (!booking) {
-    return (
-      <div className="max-w-3xl mx-auto px-4 py-16 text-center">
-        <p className="text-gray-600 mb-4">{"R\u00e9servation introuvable."}</p>
-        <Link href="/chambres" className="text-emerald-700 underline">
-          {"Retour aux chambres"}
-        </Link>
-      </div>
-    );
+    return <div className="min-h-screen flex items-center justify-center p-4"><p className="text-gray-600">Réservation introuvable.</p></div>;
   }
 
   const roomName = locale === 'fr' ? booking.room.nameFr : booking.room.nameEn;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div className="text-center mb-10">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full mb-4">
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
+    <div className="bg-gray-50 min-h-screen py-20 px-4">
+      <div className="max-w-2xl mx-auto animate-fade-in-up">
+        <div className="bg-white rounded-3xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden">
+          
+          {/* En-tête succès */}
+          <div className="bg-emerald-950 p-10 text-center">
+            <div className="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+            </div>
+            <h1 className="font-serif text-3xl md:text-4xl font-bold text-white mb-2">{t('success')}</h1>
+            <p className="text-emerald-200/80">{t('successMessage')}</p>
+          </div>
+
+          <div className="p-8 md:p-10">
+            {/* Code de réservation */}
+            <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-6 text-center mb-8">
+              <p className="text-sm text-emerald-800 font-bold uppercase tracking-widest mb-2">Votre numéro de réservation</p>
+              <div className="flex items-center justify-center gap-3">
+                <p className="text-4xl font-mono font-bold text-emerald-950">{booking.reference || booking.id}</p>
+                <CopyButton text={booking.reference || booking.id} />
+              </div>
+            </div>
+
+            {/* Détails */}
+            <h3 className="font-serif text-xl font-bold text-emerald-950 mb-4 border-b border-gray-100 pb-2">Récapitulatif</h3>
+            <div className="space-y-3 text-sm text-gray-600 mb-8">
+              <div className="flex justify-between"><span>Chambre</span><strong className="text-gray-900">{roomName}</strong></div>
+              <div className="flex justify-between"><span>{t('checkin')}</span><strong className="text-gray-900">{booking.checkIn.toLocaleDateString('fr-FR')}</strong></div>
+              <div className="flex justify-between"><span>{t('checkout')}</span><strong className="text-gray-900">{booking.checkOut.toLocaleDateString('fr-FR')}</strong></div>
+              <div className="flex justify-between"><span>{t('guests')}</span><strong className="text-gray-900">{booking.guests} pers.</strong></div>
+              <div className="flex justify-between pt-3 border-t border-gray-100 mt-3">
+                <span className="font-bold text-emerald-950">{t('total')}</span>
+                <strong className="text-xl text-emerald-700">{booking.totalAmount} CHF</strong>
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="space-y-3">
+              <Link href={`/reservation/suivi?ref=${booking.reference}`} className="block w-full text-center bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 rounded-xl transition">
+                Suivre ma réservation
+              </Link>
+              <Link href="/" className="block w-full text-center bg-white border border-gray-200 text-gray-700 font-bold py-3.5 rounded-xl hover:bg-gray-50 transition">
+                Retour à l'accueil
+              </Link>
+            </div>
+          </div>
         </div>
-        <h1 className="font-serif text-3xl md:text-4xl font-bold text-emerald-900 mb-2">
-          {t('success')}
-        </h1>
-        <p className="text-gray-600">{t('successMessage')}</p>
-      </div>
-
-      <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6 mb-6 text-center">
-        <p className="text-sm text-emerald-800 font-medium mb-1">Votre numéro de réservation</p>
-        <div className="flex items-center justify-center gap-3">
-          <p className="text-3xl font-mono font-bold text-emerald-950 tracking-wider">
-            {booking.reference || booking.id}
-          </p>
-          <CopyButton text={booking.reference || booking.id} />
-        </div>
-        <p className="text-xs text-emerald-600 mt-2">Gardez ce numéro pour suivre votre dossier.</p>
-      </div>
-
-      <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
-        <h2 className="font-serif text-xl font-bold text-emerald-900 mb-4">
-          {"R\u00e9capitulatif"}
-        </h2>
-        <dl className="space-y-3 text-sm">
-          <div className="flex justify-between border-b border-gray-100 pb-2">
-            <dt className="text-gray-500">{"Chambre"}</dt>
-            <dd className="font-medium">{roomName}</dd>
-          </div>
-          <div className="flex justify-between border-b border-gray-100 pb-2">
-            <dt className="text-gray-500">{t('checkin')}</dt>
-            <dd className="font-medium">
-              {booking.checkIn.toISOString().split('T')[0]}
-            </dd>
-          </div>
-          <div className="flex justify-between border-b border-gray-100 pb-2">
-            <dt className="text-gray-500">{t('checkout')}</dt>
-            <dd className="font-medium">
-              {booking.checkOut.toISOString().split('T')[0]}
-            </dd>
-          </div>
-          <div className="flex justify-between border-b border-gray-100 pb-2">
-            <dt className="text-gray-500">{t('guests')}</dt>
-            <dd className="font-medium">{booking.guests}</dd>
-          </div>
-          <div className="flex justify-between pt-2">
-            <dt className="text-gray-700 font-medium">{t('total')}</dt>
-            <dd className="font-bold text-emerald-700 text-lg">
-              {booking.totalAmount} {booking.currency}
-            </dd>
-          </div>
-        </dl>
-      </div>
-
-      <div className="text-center flex flex-col sm:flex-row justify-center gap-4">
-        <Link href={`/reservation/suivi?ref=${booking.reference}`} className="inline-block bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-6 py-3 rounded-lg transition">
-          Suivre ma réservation
-        </Link>
-        <Link href="/" className="inline-block bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium px-6 py-3 rounded-lg transition">
-          {"Retour \u00e0 l\u2019accueil"}
-        </Link>
       </div>
     </div>
   );
