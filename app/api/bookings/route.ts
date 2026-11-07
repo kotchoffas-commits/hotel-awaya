@@ -78,7 +78,15 @@ export async function POST(req: NextRequest) {
         amount: xofAmount,
         currency: { iso: 'XOF' },
         callback_url: `${process.env.NEXT_PUBLIC_SITE_URL}/fr/reservation/confirmation?booking=${booking.reference}`,
-        customer: { firstname: 'Client', lastname: 'Test', email: data.guestEmail, phone_number: { number: '', country: 'bj' } }
+        customer: { 
+          firstname: 'Client', 
+          lastname: 'Test', 
+          email: data.guestEmail, 
+          phone_number: { 
+            number: '', // On laisse vide pour que FedaPay demande la saisie manuelle
+            country: 'bj' 
+          } 
+        }
       });
       const token = await transaction.generateToken();
       await prisma.booking.update({ where: { id: booking.id }, data: { paymentId: transaction.id.toString() } });
@@ -87,8 +95,6 @@ export async function POST(req: NextRequest) {
 
     const stripe = getStripe();
     const amountInCents = Math.round(total * 100);
-    
-    // On utilise le nouveau paramètre "allowed_payment_method_types"
     const allowedTypes = data.paymentMethod === 'TWINT' ? ['twint'] : ['card'];
 
     const paymentIntent = await stripe.paymentIntents.create({
