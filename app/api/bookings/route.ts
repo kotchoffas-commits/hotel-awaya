@@ -38,23 +38,25 @@ export async function POST(req: NextRequest) {
         AND: [{ checkIn: { lt: checkOut } }, { checkOut: { gt: checkIn } }],
       },
     });
-    if (existing) return NextResponse.json({ error: 'Cette chambre est déjà réservée pour ces dates.' }, { status: 409 });
+    
+    // --- DEBUG : On affiche l'ID de la réservation qui bloque ---
+    if (existing) {
+      return NextResponse.json({ 
+        error: `BLOQUÉ PAR : ${existing.guestName} (Réf: ${existing.reference || existing.id}). Dates: ${existing.checkIn.toLocaleDateString()} au ${existing.checkOut.toLocaleDateString()}` 
+      }, { status: 409 });
+    }
 
-    // --- GÉNÉRATION DE LA RÉFÉRENCE COURTE ---
-    // On prend les 3 premières lettres du type de chambre (ex: DEL pour Deluxe)
+    const nights = Math.max(1, Math.ceil((checkOut.getTime() - checkIn.getTime()) / 86400000));
+    const total = nights * room.basePrice;
+
     const roomCode = room.slug.split('-').pop()?.substring(0, 3).toUpperCase() || 'CH';
     let count = await prisma.booking.count({ where: { roomId: room.id } }) + 1;
     let reference = `REF-${roomCode}-${count.toString().padStart(2, '0')}`;
     
-    // On s'assure que la référence n'existe pas déjà (au cas où)
     while (await prisma.booking.findUnique({ where: { reference } })) {
       count++;
       reference = `REF-${roomCode}-${count.toString().padStart(2, '0')}`;
     }
-    // -----------------------------------------
-
-    const nights = Math.max(1, Math.ceil((checkOut.getTime() - checkIn.getTime()) / 86400000));
-    const total = nights * room.basePrice;
 
     const booking = await prisma.booking.create({
       data: {
@@ -82,10 +84,7 @@ export async function POST(req: NextRequest) {
         amount: xofAmount,
         currency: { iso: 'XOF' },
         callback_url: `${process.env.NEXT_PUBLIC_SITE_URL}/fr/reservation/confirmation?booking=${booking.reference}`,
-        customer: {
-          firstname: 'Client', lastname: 'Test', email: data.guestEmail,
-          phone_number: { number: '', country: 'bj' }
-        }
+        customer: { firstname: 'Client', lastname: 'Test', email: data.guestEmail, phone_number: { number: '', country: 'bj' } }
       });
       const token = await transaction.generateToken();
       await prisma.booking.update({ where: { id: booking.id }, data: { paymentId: transaction.id.toString() } });
@@ -107,7 +106,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ bookingId: booking.reference, clientSecret: paymentIntent.client_secret, total, nights });
 
   } catch (err: any) {
-    console.error('[bookings/POST]', err);
     return NextResponse.json({ error: 'Une erreur est survenue. Veuillez réessayer.' }, { status: 500 });
   }
 }
