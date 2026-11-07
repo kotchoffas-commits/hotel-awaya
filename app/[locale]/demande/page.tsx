@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { Link } from '@/i18n/navigation';
+import CopyButton from '@/components/ui/CopyButton';
 
 export default function DemandePage() {
   const [formData, setFormData] = useState({
@@ -22,22 +23,16 @@ export default function DemandePage() {
         body: JSON.stringify(formData),
       });
 
-      // LECTURE ROBUSTE : On récupère le texte d'abord
       const text = await res.text();
       let data: any = {};
       
       try {
         data = text ? JSON.parse(text) : {};
       } catch (parseError) {
-        // Si ce n'est pas du JSON, c'est une page HTML d'erreur
-        console.error('Reponse non-JSON du serveur:', text.substring(0, 100));
         throw new Error(`Erreur serveur (${res.status}). Veuillez réessayer plus tard.`);
       }
 
-      if (!res.ok) {
-        throw new Error(data.error || `Erreur (${res.status})`);
-      }
-
+      if (!res.ok) throw new Error(data.error || `Erreur (${res.status})`);
       setSuccess(data.reference);
     } catch (err: any) {
       setError(err.message || 'Erreur inconnue');
@@ -55,13 +50,24 @@ export default function DemandePage() {
           </div>
           <h2 className="font-serif text-3xl font-bold text-emerald-900 mb-2">Demande envoyée !</h2>
           <p className="text-gray-600 mb-8">Notre équipe vérifie la disponibilité et vous répondra très vite par email.</p>
+          
           <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 mb-8">
-            <p className="text-xs text-emerald-800 uppercase tracking-widest font-bold mb-1">Votre code de suivi</p>
-            <p className="text-3xl font-mono font-bold text-emerald-700">{success}</p>
+            <p className="text-xs text-emerald-800 uppercase tracking-widest font-bold mb-2">Votre code de suivi</p>
+            <div className="flex items-center justify-center gap-3">
+              <p className="text-3xl font-mono font-bold text-emerald-700">{success}</p>
+              <CopyButton text={success} />
+            </div>
+            <p className="text-xs text-emerald-600 mt-2">Cliquez sur l'icône pour copier</p>
           </div>
-          <Link href="/" className="inline-block bg-emerald-700 text-white font-medium px-8 py-3 rounded-xl hover:bg-emerald-800 transition">
-            Retour à l'accueil
-          </Link>
+
+          <div className="space-y-3">
+            <Link href={`/demande/suivi?ref=${success}`} className="block w-full bg-emerald-700 text-white font-medium px-8 py-3 rounded-xl hover:bg-emerald-800 transition">
+              Suivre ma demande
+            </Link>
+            <Link href="/" className="block w-full bg-white border border-gray-200 text-gray-700 font-medium px-8 py-3 rounded-xl hover:bg-gray-50 transition">
+              Retour à l'accueil
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -70,6 +76,15 @@ export default function DemandePage() {
   return (
     <div className="min-h-screen bg-gray-50 py-16 px-4">
       <div className="max-w-2xl mx-auto">
+        
+        {/* LE BOUTON SUIVRE MA DEMANDE EST ICI */}
+        <div className="flex justify-end mb-6">
+          <Link href="/demande/suivi" className="inline-flex items-center gap-2 text-sm font-medium text-emerald-700 bg-emerald-100 hover:bg-emerald-200 px-5 py-2.5 rounded-xl transition">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            Suivre ma demande existante
+          </Link>
+        </div>
+
         <div className="text-center mb-10">
           <h1 className="font-serif text-4xl font-bold text-emerald-900 mb-4">Demande de disponibilité</h1>
           <p className="text-gray-600 max-w-lg mx-auto">Vous préférez ne pas payer en ligne ? Envoyez-nous vos dates et nous vous confirmerons la disponibilité sous 24h.</p>
