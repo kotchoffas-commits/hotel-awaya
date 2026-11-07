@@ -53,7 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Room: 'Room',
   Booking: 'Booking',
-  AdminUser: 'AdminUser'
+  AdminUser: 'AdminUser',
+  PromoCode: 'PromoCode'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -112,6 +113,8 @@ export const BookingScalarFieldEnum = {
   paymentMethod: 'paymentMethod',
   paymentId: 'paymentId',
   notes: 'notes',
+  promoCodeId: 'promoCodeId',
+  discountApplied: 'discountApplied',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -129,6 +132,17 @@ export const AdminUserScalarFieldEnum = {
 } as const
 
 export type AdminUserScalarFieldEnum = (typeof AdminUserScalarFieldEnum)[keyof typeof AdminUserScalarFieldEnum]
+
+
+export const PromoCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  discountPercent: 'discountPercent',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+} as const
+
+export type PromoCodeScalarFieldEnum = (typeof PromoCodeScalarFieldEnum)[keyof typeof PromoCodeScalarFieldEnum]
 
 
 export const SortOrder = {

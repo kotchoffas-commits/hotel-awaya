@@ -56,3 +56,8 @@ export type Booking = Prisma.BookingModel
  * 
  */
 export type AdminUser = Prisma.AdminUserModel
+/**
+ * Model PromoCode
+ * 
+ */
+export type PromoCode = Prisma.PromoCodeModel

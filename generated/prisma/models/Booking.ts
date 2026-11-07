@@ -29,11 +29,13 @@ export type AggregateBooking = {
 export type BookingAvgAggregateOutputType = {
   guests: number | null
   totalAmount: number | null
+  discountApplied: number | null
 }
 
 export type BookingSumAggregateOutputType = {
   guests: number | null
   totalAmount: number | null
+  discountApplied: number | null
 }
 
 export type BookingMinAggregateOutputType = {
@@ -55,6 +57,8 @@ export type BookingMinAggregateOutputType = {
   paymentMethod: $Enums.PaymentMethod | null
   paymentId: string | null
   notes: string | null
+  promoCodeId: string | null
+  discountApplied: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -78,6 +82,8 @@ export type BookingMaxAggregateOutputType = {
   paymentMethod: $Enums.PaymentMethod | null
   paymentId: string | null
   notes: string | null
+  promoCodeId: string | null
+  discountApplied: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -101,6 +107,8 @@ export type BookingCountAggregateOutputType = {
   paymentMethod: number
   paymentId: number
   notes: number
+  promoCodeId: number
+  discountApplied: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -110,11 +118,13 @@ export type BookingCountAggregateOutputType = {
 export type BookingAvgAggregateInputType = {
   guests?: true
   totalAmount?: true
+  discountApplied?: true
 }
 
 export type BookingSumAggregateInputType = {
   guests?: true
   totalAmount?: true
+  discountApplied?: true
 }
 
 export type BookingMinAggregateInputType = {
@@ -136,6 +146,8 @@ export type BookingMinAggregateInputType = {
   paymentMethod?: true
   paymentId?: true
   notes?: true
+  promoCodeId?: true
+  discountApplied?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -159,6 +171,8 @@ export type BookingMaxAggregateInputType = {
   paymentMethod?: true
   paymentId?: true
   notes?: true
+  promoCodeId?: true
+  discountApplied?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -182,6 +196,8 @@ export type BookingCountAggregateInputType = {
   paymentMethod?: true
   paymentId?: true
   notes?: true
+  promoCodeId?: true
+  discountApplied?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -292,6 +308,8 @@ export type BookingGroupByOutputType = {
   paymentMethod: $Enums.PaymentMethod | null
   paymentId: string | null
   notes: string | null
+  promoCodeId: string | null
+  discountApplied: number | null
   createdAt: Date
   updatedAt: Date
   _count: BookingCountAggregateOutputType | null
@@ -338,6 +356,8 @@ export type BookingWhereInput = {
   paymentMethod?: Prisma.EnumPaymentMethodNullableFilter<"Booking"> | $Enums.PaymentMethod | null
   paymentId?: Prisma.StringNullableFilter<"Booking"> | string | null
   notes?: Prisma.StringNullableFilter<"Booking"> | string | null
+  promoCodeId?: Prisma.StringNullableFilter<"Booking"> | string | null
+  discountApplied?: Prisma.FloatNullableFilter<"Booking"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
@@ -362,6 +382,8 @@ export type BookingOrderByWithRelationInput = {
   paymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentId?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  promoCodeId?: Prisma.SortOrderInput | Prisma.SortOrder
+  discountApplied?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   room?: Prisma.RoomOrderByWithRelationInput
@@ -389,6 +411,8 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   paymentMethod?: Prisma.EnumPaymentMethodNullableFilter<"Booking"> | $Enums.PaymentMethod | null
   paymentId?: Prisma.StringNullableFilter<"Booking"> | string | null
   notes?: Prisma.StringNullableFilter<"Booking"> | string | null
+  promoCodeId?: Prisma.StringNullableFilter<"Booking"> | string | null
+  discountApplied?: Prisma.FloatNullableFilter<"Booking"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
@@ -413,6 +437,8 @@ export type BookingOrderByWithAggregationInput = {
   paymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentId?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  promoCodeId?: Prisma.SortOrderInput | Prisma.SortOrder
+  discountApplied?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BookingCountOrderByAggregateInput
@@ -444,6 +470,8 @@ export type BookingScalarWhereWithAggregatesInput = {
   paymentMethod?: Prisma.EnumPaymentMethodNullableWithAggregatesFilter<"Booking"> | $Enums.PaymentMethod | null
   paymentId?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
+  promoCodeId?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
+  discountApplied?: Prisma.FloatNullableWithAggregatesFilter<"Booking"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
 }
@@ -466,6 +494,8 @@ export type BookingCreateInput = {
   paymentMethod?: $Enums.PaymentMethod | null
   paymentId?: string | null
   notes?: string | null
+  promoCodeId?: string | null
+  discountApplied?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   room: Prisma.RoomCreateNestedOneWithoutBookingsInput
@@ -490,6 +520,8 @@ export type BookingUncheckedCreateInput = {
   paymentMethod?: $Enums.PaymentMethod | null
   paymentId?: string | null
   notes?: string | null
+  promoCodeId?: string | null
+  discountApplied?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -512,6 +544,8 @@ export type BookingUpdateInput = {
   paymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoCodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   room?: Prisma.RoomUpdateOneRequiredWithoutBookingsNestedInput
@@ -536,6 +570,8 @@ export type BookingUncheckedUpdateInput = {
   paymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoCodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -559,6 +595,8 @@ export type BookingCreateManyInput = {
   paymentMethod?: $Enums.PaymentMethod | null
   paymentId?: string | null
   notes?: string | null
+  promoCodeId?: string | null
+  discountApplied?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -581,6 +619,8 @@ export type BookingUpdateManyMutationInput = {
   paymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoCodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -604,6 +644,8 @@ export type BookingUncheckedUpdateManyInput = {
   paymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoCodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -637,6 +679,8 @@ export type BookingCountOrderByAggregateInput = {
   paymentMethod?: Prisma.SortOrder
   paymentId?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  promoCodeId?: Prisma.SortOrder
+  discountApplied?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -644,6 +688,7 @@ export type BookingCountOrderByAggregateInput = {
 export type BookingAvgOrderByAggregateInput = {
   guests?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
+  discountApplied?: Prisma.SortOrder
 }
 
 export type BookingMaxOrderByAggregateInput = {
@@ -665,6 +710,8 @@ export type BookingMaxOrderByAggregateInput = {
   paymentMethod?: Prisma.SortOrder
   paymentId?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  promoCodeId?: Prisma.SortOrder
+  discountApplied?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -688,6 +735,8 @@ export type BookingMinOrderByAggregateInput = {
   paymentMethod?: Prisma.SortOrder
   paymentId?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  promoCodeId?: Prisma.SortOrder
+  discountApplied?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -695,6 +744,7 @@ export type BookingMinOrderByAggregateInput = {
 export type BookingSumOrderByAggregateInput = {
   guests?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
+  discountApplied?: Prisma.SortOrder
 }
 
 export type BookingCreateNestedManyWithoutRoomInput = {
@@ -751,6 +801,14 @@ export type NullableEnumPaymentMethodFieldUpdateOperationsInput = {
   set?: $Enums.PaymentMethod | null
 }
 
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type BookingCreateWithoutRoomInput = {
   id?: string
   reference?: string | null
@@ -769,6 +827,8 @@ export type BookingCreateWithoutRoomInput = {
   paymentMethod?: $Enums.PaymentMethod | null
   paymentId?: string | null
   notes?: string | null
+  promoCodeId?: string | null
+  discountApplied?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -791,6 +851,8 @@ export type BookingUncheckedCreateWithoutRoomInput = {
   paymentMethod?: $Enums.PaymentMethod | null
   paymentId?: string | null
   notes?: string | null
+  promoCodeId?: string | null
+  discountApplied?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -843,6 +905,8 @@ export type BookingScalarWhereInput = {
   paymentMethod?: Prisma.EnumPaymentMethodNullableFilter<"Booking"> | $Enums.PaymentMethod | null
   paymentId?: Prisma.StringNullableFilter<"Booking"> | string | null
   notes?: Prisma.StringNullableFilter<"Booking"> | string | null
+  promoCodeId?: Prisma.StringNullableFilter<"Booking"> | string | null
+  discountApplied?: Prisma.FloatNullableFilter<"Booking"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
 }
@@ -865,6 +929,8 @@ export type BookingCreateManyRoomInput = {
   paymentMethod?: $Enums.PaymentMethod | null
   paymentId?: string | null
   notes?: string | null
+  promoCodeId?: string | null
+  discountApplied?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -887,6 +953,8 @@ export type BookingUpdateWithoutRoomInput = {
   paymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoCodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -909,6 +977,8 @@ export type BookingUncheckedUpdateWithoutRoomInput = {
   paymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoCodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -931,6 +1001,8 @@ export type BookingUncheckedUpdateManyWithoutRoomInput = {
   paymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promoCodeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discountApplied?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -956,6 +1028,8 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   paymentMethod?: boolean
   paymentId?: boolean
   notes?: boolean
+  promoCodeId?: boolean
+  discountApplied?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
@@ -980,6 +1054,8 @@ export type BookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   paymentMethod?: boolean
   paymentId?: boolean
   notes?: boolean
+  promoCodeId?: boolean
+  discountApplied?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
@@ -1004,6 +1080,8 @@ export type BookingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   paymentMethod?: boolean
   paymentId?: boolean
   notes?: boolean
+  promoCodeId?: boolean
+  discountApplied?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
@@ -1028,11 +1106,13 @@ export type BookingSelectScalar = {
   paymentMethod?: boolean
   paymentId?: boolean
   notes?: boolean
+  promoCodeId?: boolean
+  discountApplied?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reference" | "roomId" | "guestName" | "guestEmail" | "guestPhone" | "checkIn" | "checkOut" | "guests" | "totalAmount" | "currency" | "status" | "isNotified" | "source" | "externalId" | "paymentMethod" | "paymentId" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
+export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reference" | "roomId" | "guestName" | "guestEmail" | "guestPhone" | "checkIn" | "checkOut" | "guests" | "totalAmount" | "currency" | "status" | "isNotified" | "source" | "externalId" | "paymentMethod" | "paymentId" | "notes" | "promoCodeId" | "discountApplied" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
 export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }
@@ -1067,6 +1147,8 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     paymentMethod: $Enums.PaymentMethod | null
     paymentId: string | null
     notes: string | null
+    promoCodeId: string | null
+    discountApplied: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["booking"]>
@@ -1511,6 +1593,8 @@ export interface BookingFieldRefs {
   readonly paymentMethod: Prisma.FieldRef<"Booking", 'PaymentMethod'>
   readonly paymentId: Prisma.FieldRef<"Booking", 'String'>
   readonly notes: Prisma.FieldRef<"Booking", 'String'>
+  readonly promoCodeId: Prisma.FieldRef<"Booking", 'String'>
+  readonly discountApplied: Prisma.FieldRef<"Booking", 'Float'>
   readonly createdAt: Prisma.FieldRef<"Booking", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Booking", 'DateTime'>
 }

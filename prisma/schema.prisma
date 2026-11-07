@@ -46,6 +46,10 @@ model Booking {
   paymentMethod PaymentMethod?
   paymentId     String?
   notes         String?
+  
+  promoCodeId   String?
+  discountApplied Float?
+
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 
@@ -81,4 +85,11 @@ model AdminUser {
   name         String
   role         String   @default("admin")
   createdAt    DateTime @default(now())
+}
+model PromoCode {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  discountPercent Int
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
 }
