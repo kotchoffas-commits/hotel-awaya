@@ -22,7 +22,7 @@ type Props = {
   guests: number;
 };
 
-// Composant Pop-up avec la charte graphique de l'hôtel
+// Composant Pop-up avec la charte graphique de l'hÃ´tel
 function ErrorModal({ message, onClose }: { message: string; onClose: () => void }) {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -34,7 +34,7 @@ function ErrorModal({ message, onClose }: { message: string; onClose: () => void
       <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden animate-in zoom-in-95 duration-300 border border-gray-100">
         <div className="p-8 flex flex-col items-center text-center">
           
-          {/* Icône d'avertissement élégante (Ambre) */}
+          {/* IcÃ´ne d'avertissement Ã©lÃ©gante (Ambre) */}
           <div className="w-20 h-20 bg-amber-50 text-amber-500 rounded-full flex items-center justify-center mb-6">
             <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -46,7 +46,7 @@ function ErrorModal({ message, onClose }: { message: string; onClose: () => void
             {message}
           </p>
           
-          {/* Bouton aux couleurs de l'hôtel */}
+          {/* Bouton aux couleurs de l'hÃ´tel */}
           <button
             onClick={onClose}
             className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-medium py-3.5 rounded-xl transition shadow-md"
@@ -168,7 +168,7 @@ export default function ReservationForm({ roomSlug, checkIn, checkOut, guests }:
         router.push(`/reservation/confirmation?booking=${data.bookingId}`);
       }
     } catch (err: any) {
-      setPopupError(err.message || 'Une erreur est survenue lors de la réservation.');
+      setPopupError(err.message || 'Une erreur est survenue lors de la rÃ©servation.');
     } finally {
       setLoading(false);
     }
