@@ -1,6 +1,7 @@
 'use client';
 import { Link } from '@/i18n/navigation';
 import { usePathname } from 'next/navigation';
+import NotificationDrawer from './NotificationDrawer';
 
 export default function AdminNav() {
   const pathname = usePathname();
@@ -41,7 +42,8 @@ export default function AdminNav() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link href="/" className="text-sm text-gray-500 hover:text-emerald-700 transition">
+            <NotificationDrawer />
+            <Link href="/" className="text-sm text-gray-500 hover:text-emerald-700 transition hidden sm:block">
               Voir le site
             </Link>
             <a href="/api/admin/logout?locale=fr" className="bg-red-50 text-red-600 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-red-100 transition">
