@@ -27,10 +27,7 @@ export async function POST(req: NextRequest) {
 
     const checkIn = new Date(data.checkIn);
     const checkOut = new Date(data.checkOut);
-    if (isNaN(checkIn.getTime()) || isNaN(checkOut.getTime())) {
-      return NextResponse.json({ error: 'Les dates choisies sont invalides.' }, { status: 400 });
-    }
-
+    
     const existing = await prisma.booking.findFirst({
       where: {
         roomId: room.id,
@@ -40,7 +37,7 @@ export async function POST(req: NextRequest) {
     });
     
     if (existing) {
-      return NextResponse.json({ error: 'Cette chambre est déjà réservée pour ces dates. Veuillez en choisir d\'autres.' }, { status: 409 });
+      return NextResponse.json({ error: `Cette chambre est déjà réservée (Réf: ${existing.reference || existing.id}).` }, { status: 409 });
     }
 
     const nights = Math.max(1, Math.ceil((checkOut.getTime() - checkIn.getTime()) / 86400000));
@@ -103,7 +100,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ bookingId: booking.reference, clientSecret: paymentIntent.client_secret, total, nights });
 
   } catch (err: any) {
-    console.error('[bookings/POST]', err);
-    return NextResponse.json({ error: 'Une erreur est survenue. Veuillez réessayer.' }, { status: 500 });
+    console.error('[bookings/POST] ERREUR TECHNIQUE:', err);
+    // ON AFFICHE L'ERREUR RÉELLE POUR COMPRENDRE LE PROBLÈME
+    return NextResponse.json({ error: `Erreur technique : ${err.message}` }, { status: 500 });
   }
 }
