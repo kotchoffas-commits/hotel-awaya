@@ -35,6 +35,7 @@ export default async function AdminDashboardPage({
           Tableau de bord
         </h1>
         <div className="flex flex-wrap items-center gap-3 text-sm">
+          <Link href="/admin/calendar" className="bg-emerald-900 text-white px-4 py-2 rounded-lg font-medium hover:bg-emerald-800 transition shadow-sm">Calendrier</Link>
           <Link href="/admin/rooms" className="bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium hover:bg-emerald-800 transition shadow-sm">Gérer les chambres</Link>
           <Link href="/admin/promos" className="bg-gray-900 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition shadow-sm">Codes Promo</Link>
           <Link href="/" className="text-gray-500 hover:text-emerald-700 underline px-2">
