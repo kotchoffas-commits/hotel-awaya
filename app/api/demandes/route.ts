@@ -18,28 +18,31 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     
-    // 1. Validation des données
+    // 1. Validation des données (Zod)
     const parsed = schema.safeParse(body);
     if (!parsed.success) {
-      return NextResponse.json({ error: 'Données invalides. Vérifiez vos dates et votre email.' }, { status: 400 });
+      console.error('[DEMANDE POST] Zod Error:', parsed.error.issues);
+      return NextResponse.json({ 
+        error: `Données invalides : ${parsed.error.issues.map(i => i.message).join(', ')}` 
+      }, { status: 400 });
     }
     const data = parsed.data;
 
-    // 2. Génération du code de demande (ex: REQ-1234)
+    // 2. Génération du code de demande
     const randomCode = Math.floor(1000 + Math.random() * 9000);
     const reference = `REQ-${randomCode}`;
 
-    // 3. Création dans la base
+    // 3. Création dans la base (Prisma)
     const request = await prisma.bookingRequest.create({
       data: {
         reference,
         guestName: data.guestName,
         guestEmail: data.guestEmail,
-        guestPhone: data.guestPhone,
+        guestPhone: data.guestPhone || null,
         checkIn: new Date(data.checkIn),
         checkOut: new Date(data.checkOut),
         guests: data.guests,
-        roomSlug: data.roomSlug,
+        roomSlug: data.roomSlug || null,
         status: 'PENDING',
         isNotified: false,
       }
@@ -50,15 +53,9 @@ export async function POST(req: NextRequest) {
   } catch (err: any) {
     console.error('[DEMANDE POST] ERREUR COMPLETE:', err);
     
-    // Si l'erreur est liée à Prisma (ex: table manquante)
-    if (err.code === 'P2021' || err.message?.includes('does not exist')) {
-      return NextResponse.json({ 
-        error: 'La base de donnees nest pas a jour. Contactez l administrateur.' 
-      }, { status: 500 });
-    }
-
+    // On renvoie l'erreur exacte pour comprendre le problème
     return NextResponse.json({ 
-      error: 'Une erreur est survenue lors de lenvoi. Veuillez reessayer.' 
+      error: `Erreur technique : ${err.message || 'Inconnue'}` 
     }, { status: 500 });
   }
 }
