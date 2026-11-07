@@ -27,17 +27,17 @@ export async function POST(req: NextRequest) {
 
     const checkIn = new Date(data.checkIn);
     const checkOut = new Date(data.checkOut);
+    
     const existing = await prisma.booking.findFirst({
       where: { roomId: room.id, status: { in: ['CONFIRMED', 'PENDING'] }, AND: [{ checkIn: { lt: checkOut } }, { checkOut: { gt: checkIn } }] },
     });
-    if (existing) return NextResponse.json({ error: 'Chambre indisponible.' }, { status: 409 });
+    if (existing) return NextResponse.json({ error: 'Chambre indisponible pour ces dates.' }, { status: 409 });
 
     const nights = Math.max(1, Math.ceil((checkOut.getTime() - checkIn.getTime()) / 86400000));
     let total = nights * room.basePrice;
     let promoCodeId = null;
     let discountApplied = 0;
 
-    // --- VÉRIFICATION DU CODE PROMO ---
     if (data.promoCode) {
       const promo = await prisma.promoCode.findUnique({ where: { code: data.promoCode.toUpperCase() } });
       if (promo && promo.isActive) {
@@ -47,8 +47,21 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // --- GÉNÉRATION DE LA RÉFÉRENCE COURTE (ex: REF-DEL-01) ---
+    const roomCode = room.slug.split('-').pop()?.substring(0, 3).toUpperCase() || 'CH';
+    let count = await prisma.booking.count({ where: { roomId: room.id } }) + 1;
+    let reference = `REF-${roomCode}-${count.toString().padStart(2, '0')}`;
+    
+    // Sécurité anti-doublon
+    while (await prisma.booking.findUnique({ where: { reference } })) {
+      count++;
+      reference = `REF-${roomCode}-${count.toString().padStart(2, '0')}`;
+    }
+    // ---------------------------------------------------------
+
     const booking = await prisma.booking.create({
       data: {
+        reference: reference, // <-- On assigne la référence propre
         roomId: room.id, guestName: data.guestName, guestEmail: data.guestEmail, guestPhone: data.guestPhone,
         checkIn, checkOut, guests: data.guests, totalAmount: total, currency: 'CHF',
         status: 'PENDING', source: 'DIRECT', paymentMethod: data.paymentMethod,
@@ -64,8 +77,9 @@ export async function POST(req: NextRequest) {
 
     await prisma.booking.update({ where: { id: booking.id }, data: { paymentId: paymentIntent.id } });
 
-    return NextResponse.json({ bookingId: booking.id, clientSecret: paymentIntent.client_secret, total, nights });
+    return NextResponse.json({ bookingId: booking.reference, clientSecret: paymentIntent.client_secret, total, nights });
   } catch (err: any) {
+    console.error('[bookings/POST]', err);
     return NextResponse.json({ error: 'Une erreur est survenue.' }, { status: 500 });
   }
 }
