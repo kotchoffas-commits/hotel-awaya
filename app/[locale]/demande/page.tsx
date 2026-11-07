@@ -5,7 +5,7 @@ import CopyButton from '@/components/ui/CopyButton';
 
 export default function DemandePage() {
   const [formData, setFormData] = useState({
-    guestName: '', guestEmail: '', guestPhone: '', checkIn: '', checkOut: '', guests: 2
+    guestName: '', guestEmail: '', guestPhone: '', whatsapp: '', message: '', checkIn: '', checkOut: '', guests: 2
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
@@ -26,11 +26,8 @@ export default function DemandePage() {
       const text = await res.text();
       let data: any = {};
       
-      try {
-        data = text ? JSON.parse(text) : {};
-      } catch (parseError) {
-        throw new Error(`Erreur serveur (${res.status}). Veuillez réessayer plus tard.`);
-      }
+      try { data = text ? JSON.parse(text) : {}; } 
+      catch (parseError) { throw new Error(`Erreur serveur (${res.status}).`); }
 
       if (!res.ok) throw new Error(data.error || `Erreur (${res.status})`);
       setSuccess(data.reference);
@@ -57,16 +54,11 @@ export default function DemandePage() {
               <p className="text-3xl font-mono font-bold text-emerald-700">{success}</p>
               <CopyButton text={success} />
             </div>
-            <p className="text-xs text-emerald-600 mt-2">Cliquez sur l'icône pour copier</p>
           </div>
 
           <div className="space-y-3">
-            <Link href={`/demande/suivi?ref=${success}`} className="block w-full bg-emerald-700 text-white font-medium px-8 py-3 rounded-xl hover:bg-emerald-800 transition">
-              Suivre ma demande
-            </Link>
-            <Link href="/" className="block w-full bg-white border border-gray-200 text-gray-700 font-medium px-8 py-3 rounded-xl hover:bg-gray-50 transition">
-              Retour à l'accueil
-            </Link>
+            <Link href={`/demande/suivi?ref=${success}`} className="block w-full bg-emerald-700 text-white font-medium px-8 py-3 rounded-xl hover:bg-emerald-800 transition">Suivre ma demande</Link>
+            <Link href="/" className="block w-full bg-white border border-gray-200 text-gray-700 font-medium px-8 py-3 rounded-xl hover:bg-gray-50 transition">Retour à l'accueil</Link>
           </div>
         </div>
       </div>
@@ -77,7 +69,6 @@ export default function DemandePage() {
     <div className="min-h-screen bg-gray-50 py-16 px-4">
       <div className="max-w-2xl mx-auto">
         
-        {/* LE BOUTON SUIVRE MA DEMANDE EST ICI */}
         <div className="flex justify-end mb-6">
           <Link href="/demande/suivi" className="inline-flex items-center gap-2 text-sm font-medium text-emerald-700 bg-emerald-100 hover:bg-emerald-200 px-5 py-2.5 rounded-xl transition">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
@@ -93,12 +84,14 @@ export default function DemandePage() {
         {error && <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-xl mb-6 text-center text-sm">{error}</div>}
 
         <form onSubmit={handleSubmit} className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm space-y-6">
+          
           <div className="space-y-4">
             <h3 className="font-serif text-xl font-bold text-emerald-900 border-b border-gray-100 pb-2">1. Vos coordonnées</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input type="text" required placeholder="Nom complet" value={formData.guestName} onChange={e => setFormData({...formData, guestName: e.target.value})} className="border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-500 outline-none transition" />
               <input type="email" required placeholder="Adresse email" value={formData.guestEmail} onChange={e => setFormData({...formData, guestEmail: e.target.value})} className="border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-500 outline-none transition" />
-              <input type="tel" placeholder="Téléphone (WhatsApp de préférence)" value={formData.guestPhone} onChange={e => setFormData({...formData, guestPhone: e.target.value})} className="border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-500 outline-none transition md:col-span-2" />
+              <input type="tel" placeholder="Téléphone" value={formData.guestPhone} onChange={e => setFormData({...formData, guestPhone: e.target.value})} className="border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-500 outline-none transition" />
+              <input type="tel" placeholder="Numéro WhatsApp" value={formData.whatsapp} onChange={e => setFormData({...formData, whatsapp: e.target.value})} className="border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-500 outline-none transition" />
             </div>
           </div>
 
@@ -120,6 +113,17 @@ export default function DemandePage() {
                 {[1,2,3,4,5,6].map(n => <option key={n} value={n}>{n} personne(s)</option>)}
               </select>
             </div>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="font-serif text-xl font-bold text-emerald-900 border-b border-gray-100 pb-2 mt-8">3. Message (Optionnel)</h3>
+            <textarea 
+              value={formData.message} 
+              onChange={e => setFormData({...formData, message: e.target.value})} 
+              placeholder="Avez-vous des demandes particulières ? (Arrivée tardive, lit bébé, allergie, etc.)" 
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-500 outline-none transition" 
+              rows={3}
+            ></textarea>
           </div>
 
           <button type="submit" disabled={loading} className="w-full bg-emerald-700 hover:bg-emerald-800 disabled:bg-gray-400 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-emerald-700/20 mt-6 flex justify-center items-center gap-2">

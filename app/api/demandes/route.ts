@@ -6,6 +6,8 @@ const schema = z.object({
   guestName: z.string().min(2),
   guestEmail: z.string().email(),
   guestPhone: z.string().optional(),
+  whatsapp: z.string().optional(),
+  message: z.string().optional(),
   checkIn: z.string(),
   checkOut: z.string(),
   guests: z.number().int().min(1),
@@ -26,15 +28,16 @@ export async function POST(req: NextRequest) {
         guestName: data.guestName,
         guestEmail: data.guestEmail,
         guestPhone: data.guestPhone || null,
+        whatsapp: data.whatsapp || null,
+        message: data.message || null,
         checkIn: new Date(data.checkIn),
         checkOut: new Date(data.checkOut),
         guests: data.guests,
         status: 'PENDING',
-        isNotified: false, // TRÈS IMPORTANT : La cloche va s'incrémenter grâce à ça
+        isNotified: false,
       }
     });
 
-    console.log(`[NOUVELLE DEMANDE] ${request.reference} créée par ${request.guestName}`);
     return NextResponse.json({ success: true, reference: request.reference });
   } catch (err: any) {
     console.error('[DEMANDE POST] Erreur:', err);

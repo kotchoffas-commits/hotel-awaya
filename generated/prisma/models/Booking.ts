@@ -45,6 +45,8 @@ export type BookingMinAggregateOutputType = {
   guestName: string | null
   guestEmail: string | null
   guestPhone: string | null
+  whatsapp: string | null
+  message: string | null
   checkIn: Date | null
   checkOut: Date | null
   guests: number | null
@@ -70,6 +72,8 @@ export type BookingMaxAggregateOutputType = {
   guestName: string | null
   guestEmail: string | null
   guestPhone: string | null
+  whatsapp: string | null
+  message: string | null
   checkIn: Date | null
   checkOut: Date | null
   guests: number | null
@@ -95,6 +99,8 @@ export type BookingCountAggregateOutputType = {
   guestName: number
   guestEmail: number
   guestPhone: number
+  whatsapp: number
+  message: number
   checkIn: number
   checkOut: number
   guests: number
@@ -134,6 +140,8 @@ export type BookingMinAggregateInputType = {
   guestName?: true
   guestEmail?: true
   guestPhone?: true
+  whatsapp?: true
+  message?: true
   checkIn?: true
   checkOut?: true
   guests?: true
@@ -159,6 +167,8 @@ export type BookingMaxAggregateInputType = {
   guestName?: true
   guestEmail?: true
   guestPhone?: true
+  whatsapp?: true
+  message?: true
   checkIn?: true
   checkOut?: true
   guests?: true
@@ -184,6 +194,8 @@ export type BookingCountAggregateInputType = {
   guestName?: true
   guestEmail?: true
   guestPhone?: true
+  whatsapp?: true
+  message?: true
   checkIn?: true
   checkOut?: true
   guests?: true
@@ -296,6 +308,8 @@ export type BookingGroupByOutputType = {
   guestName: string
   guestEmail: string
   guestPhone: string | null
+  whatsapp: string | null
+  message: string | null
   checkIn: Date
   checkOut: Date
   guests: number
@@ -344,6 +358,8 @@ export type BookingWhereInput = {
   guestName?: Prisma.StringFilter<"Booking"> | string
   guestEmail?: Prisma.StringFilter<"Booking"> | string
   guestPhone?: Prisma.StringNullableFilter<"Booking"> | string | null
+  whatsapp?: Prisma.StringNullableFilter<"Booking"> | string | null
+  message?: Prisma.StringNullableFilter<"Booking"> | string | null
   checkIn?: Prisma.DateTimeFilter<"Booking"> | Date | string
   checkOut?: Prisma.DateTimeFilter<"Booking"> | Date | string
   guests?: Prisma.IntFilter<"Booking"> | number
@@ -371,6 +387,8 @@ export type BookingOrderByWithRelationInput = {
   guestName?: Prisma.SortOrder
   guestEmail?: Prisma.SortOrder
   guestPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  whatsapp?: Prisma.SortOrderInput | Prisma.SortOrder
+  message?: Prisma.SortOrderInput | Prisma.SortOrder
   checkIn?: Prisma.SortOrder
   checkOut?: Prisma.SortOrder
   guests?: Prisma.SortOrder
@@ -402,6 +420,8 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   guestName?: Prisma.StringFilter<"Booking"> | string
   guestEmail?: Prisma.StringFilter<"Booking"> | string
   guestPhone?: Prisma.StringNullableFilter<"Booking"> | string | null
+  whatsapp?: Prisma.StringNullableFilter<"Booking"> | string | null
+  message?: Prisma.StringNullableFilter<"Booking"> | string | null
   checkIn?: Prisma.DateTimeFilter<"Booking"> | Date | string
   checkOut?: Prisma.DateTimeFilter<"Booking"> | Date | string
   guests?: Prisma.IntFilter<"Booking"> | number
@@ -428,6 +448,8 @@ export type BookingOrderByWithAggregationInput = {
   guestName?: Prisma.SortOrder
   guestEmail?: Prisma.SortOrder
   guestPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  whatsapp?: Prisma.SortOrderInput | Prisma.SortOrder
+  message?: Prisma.SortOrderInput | Prisma.SortOrder
   checkIn?: Prisma.SortOrder
   checkOut?: Prisma.SortOrder
   guests?: Prisma.SortOrder
@@ -461,6 +483,8 @@ export type BookingScalarWhereWithAggregatesInput = {
   guestName?: Prisma.StringWithAggregatesFilter<"Booking"> | string
   guestEmail?: Prisma.StringWithAggregatesFilter<"Booking"> | string
   guestPhone?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
+  whatsapp?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
+  message?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
   checkIn?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
   checkOut?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
   guests?: Prisma.IntWithAggregatesFilter<"Booking"> | number
@@ -485,6 +509,8 @@ export type BookingCreateInput = {
   guestName: string
   guestEmail: string
   guestPhone?: string | null
+  whatsapp?: string | null
+  message?: string | null
   checkIn: Date | string
   checkOut: Date | string
   guests: number
@@ -511,6 +537,8 @@ export type BookingUncheckedCreateInput = {
   guestName: string
   guestEmail: string
   guestPhone?: string | null
+  whatsapp?: string | null
+  message?: string | null
   checkIn: Date | string
   checkOut: Date | string
   guests: number
@@ -535,6 +563,8 @@ export type BookingUpdateInput = {
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
   guestPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkIn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   checkOut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guests?: Prisma.IntFieldUpdateOperationsInput | number
@@ -561,6 +591,8 @@ export type BookingUncheckedUpdateInput = {
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
   guestPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkIn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   checkOut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guests?: Prisma.IntFieldUpdateOperationsInput | number
@@ -586,6 +618,8 @@ export type BookingCreateManyInput = {
   guestName: string
   guestEmail: string
   guestPhone?: string | null
+  whatsapp?: string | null
+  message?: string | null
   checkIn: Date | string
   checkOut: Date | string
   guests: number
@@ -610,6 +644,8 @@ export type BookingUpdateManyMutationInput = {
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
   guestPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkIn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   checkOut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guests?: Prisma.IntFieldUpdateOperationsInput | number
@@ -634,6 +670,8 @@ export type BookingUncheckedUpdateManyInput = {
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
   guestPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkIn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   checkOut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guests?: Prisma.IntFieldUpdateOperationsInput | number
@@ -669,6 +707,8 @@ export type BookingCountOrderByAggregateInput = {
   guestName?: Prisma.SortOrder
   guestEmail?: Prisma.SortOrder
   guestPhone?: Prisma.SortOrder
+  whatsapp?: Prisma.SortOrder
+  message?: Prisma.SortOrder
   checkIn?: Prisma.SortOrder
   checkOut?: Prisma.SortOrder
   guests?: Prisma.SortOrder
@@ -700,6 +740,8 @@ export type BookingMaxOrderByAggregateInput = {
   guestName?: Prisma.SortOrder
   guestEmail?: Prisma.SortOrder
   guestPhone?: Prisma.SortOrder
+  whatsapp?: Prisma.SortOrder
+  message?: Prisma.SortOrder
   checkIn?: Prisma.SortOrder
   checkOut?: Prisma.SortOrder
   guests?: Prisma.SortOrder
@@ -725,6 +767,8 @@ export type BookingMinOrderByAggregateInput = {
   guestName?: Prisma.SortOrder
   guestEmail?: Prisma.SortOrder
   guestPhone?: Prisma.SortOrder
+  whatsapp?: Prisma.SortOrder
+  message?: Prisma.SortOrder
   checkIn?: Prisma.SortOrder
   checkOut?: Prisma.SortOrder
   guests?: Prisma.SortOrder
@@ -859,6 +903,8 @@ export type BookingCreateWithoutRoomInput = {
   guestName: string
   guestEmail: string
   guestPhone?: string | null
+  whatsapp?: string | null
+  message?: string | null
   checkIn: Date | string
   checkOut: Date | string
   guests: number
@@ -883,6 +929,8 @@ export type BookingUncheckedCreateWithoutRoomInput = {
   guestName: string
   guestEmail: string
   guestPhone?: string | null
+  whatsapp?: string | null
+  message?: string | null
   checkIn: Date | string
   checkOut: Date | string
   guests: number
@@ -937,6 +985,8 @@ export type BookingScalarWhereInput = {
   guestName?: Prisma.StringFilter<"Booking"> | string
   guestEmail?: Prisma.StringFilter<"Booking"> | string
   guestPhone?: Prisma.StringNullableFilter<"Booking"> | string | null
+  whatsapp?: Prisma.StringNullableFilter<"Booking"> | string | null
+  message?: Prisma.StringNullableFilter<"Booking"> | string | null
   checkIn?: Prisma.DateTimeFilter<"Booking"> | Date | string
   checkOut?: Prisma.DateTimeFilter<"Booking"> | Date | string
   guests?: Prisma.IntFilter<"Booking"> | number
@@ -961,6 +1011,8 @@ export type BookingCreateWithoutPromoCodeInput = {
   guestName: string
   guestEmail: string
   guestPhone?: string | null
+  whatsapp?: string | null
+  message?: string | null
   checkIn: Date | string
   checkOut: Date | string
   guests: number
@@ -986,6 +1038,8 @@ export type BookingUncheckedCreateWithoutPromoCodeInput = {
   guestName: string
   guestEmail: string
   guestPhone?: string | null
+  whatsapp?: string | null
+  message?: string | null
   checkIn: Date | string
   checkOut: Date | string
   guests: number
@@ -1035,6 +1089,8 @@ export type BookingCreateManyRoomInput = {
   guestName: string
   guestEmail: string
   guestPhone?: string | null
+  whatsapp?: string | null
+  message?: string | null
   checkIn: Date | string
   checkOut: Date | string
   guests: number
@@ -1059,6 +1115,8 @@ export type BookingUpdateWithoutRoomInput = {
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
   guestPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkIn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   checkOut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guests?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1083,6 +1141,8 @@ export type BookingUncheckedUpdateWithoutRoomInput = {
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
   guestPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkIn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   checkOut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guests?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1107,6 +1167,8 @@ export type BookingUncheckedUpdateManyWithoutRoomInput = {
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
   guestPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkIn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   checkOut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guests?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1132,6 +1194,8 @@ export type BookingCreateManyPromoCodeInput = {
   guestName: string
   guestEmail: string
   guestPhone?: string | null
+  whatsapp?: string | null
+  message?: string | null
   checkIn: Date | string
   checkOut: Date | string
   guests: number
@@ -1155,6 +1219,8 @@ export type BookingUpdateWithoutPromoCodeInput = {
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
   guestPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkIn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   checkOut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guests?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1180,6 +1246,8 @@ export type BookingUncheckedUpdateWithoutPromoCodeInput = {
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
   guestPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkIn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   checkOut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guests?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1204,6 +1272,8 @@ export type BookingUncheckedUpdateManyWithoutPromoCodeInput = {
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
   guestPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkIn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   checkOut?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guests?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1230,6 +1300,8 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   guestName?: boolean
   guestEmail?: boolean
   guestPhone?: boolean
+  whatsapp?: boolean
+  message?: boolean
   checkIn?: boolean
   checkOut?: boolean
   guests?: boolean
@@ -1257,6 +1329,8 @@ export type BookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   guestName?: boolean
   guestEmail?: boolean
   guestPhone?: boolean
+  whatsapp?: boolean
+  message?: boolean
   checkIn?: boolean
   checkOut?: boolean
   guests?: boolean
@@ -1284,6 +1358,8 @@ export type BookingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   guestName?: boolean
   guestEmail?: boolean
   guestPhone?: boolean
+  whatsapp?: boolean
+  message?: boolean
   checkIn?: boolean
   checkOut?: boolean
   guests?: boolean
@@ -1311,6 +1387,8 @@ export type BookingSelectScalar = {
   guestName?: boolean
   guestEmail?: boolean
   guestPhone?: boolean
+  whatsapp?: boolean
+  message?: boolean
   checkIn?: boolean
   checkOut?: boolean
   guests?: boolean
@@ -1329,7 +1407,7 @@ export type BookingSelectScalar = {
   updatedAt?: boolean
 }
 
-export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reference" | "roomId" | "guestName" | "guestEmail" | "guestPhone" | "checkIn" | "checkOut" | "guests" | "totalAmount" | "currency" | "status" | "source" | "externalId" | "paymentMethod" | "paymentId" | "notes" | "promoCodeId" | "discountApplied" | "isNotified" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
+export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reference" | "roomId" | "guestName" | "guestEmail" | "guestPhone" | "whatsapp" | "message" | "checkIn" | "checkOut" | "guests" | "totalAmount" | "currency" | "status" | "source" | "externalId" | "paymentMethod" | "paymentId" | "notes" | "promoCodeId" | "discountApplied" | "isNotified" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
 export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   promoCode?: boolean | Prisma.Booking$promoCodeArgs<ExtArgs>
@@ -1356,6 +1434,8 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     guestName: string
     guestEmail: string
     guestPhone: string | null
+    whatsapp: string | null
+    message: string | null
     checkIn: Date
     checkOut: Date
     guests: number
@@ -1803,6 +1883,8 @@ export interface BookingFieldRefs {
   readonly guestName: Prisma.FieldRef<"Booking", 'String'>
   readonly guestEmail: Prisma.FieldRef<"Booking", 'String'>
   readonly guestPhone: Prisma.FieldRef<"Booking", 'String'>
+  readonly whatsapp: Prisma.FieldRef<"Booking", 'String'>
+  readonly message: Prisma.FieldRef<"Booking", 'String'>
   readonly checkIn: Prisma.FieldRef<"Booking", 'DateTime'>
   readonly checkOut: Prisma.FieldRef<"Booking", 'DateTime'>
   readonly guests: Prisma.FieldRef<"Booking", 'Int'>

@@ -34,6 +34,8 @@ model Booking {
   guestName     String
   guestEmail    String
   guestPhone    String?
+  whatsapp    String?
+  message     String?  @db.Text
   checkIn       DateTime
   checkOut      DateTime
   guests        Int
@@ -61,6 +63,8 @@ model BookingRequest {
   guestName   String
   guestEmail  String
   guestPhone  String?
+  whatsapp    String?
+  message     String?  @db.Text
   checkIn     DateTime
   checkOut    DateTime
   guests      Int

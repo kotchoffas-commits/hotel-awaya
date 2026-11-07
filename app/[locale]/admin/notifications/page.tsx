@@ -56,10 +56,17 @@ export default async function NotificationsPage({ params }: { params: Promise<{ 
                   <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">{req.reference}</span>
                 </div>
                 <h3 className="font-bold text-lg text-gray-900">{req.guestName}</h3>
-                <p className="text-sm text-gray-600">{req.guestEmail} • {req.guestPhone || 'Pas de tél.'}</p>
-                <p className="text-sm font-medium text-gray-800 mt-2">
+                <p className="text-sm text-gray-600">Email : {req.guestEmail}</p>
+                <p className="text-sm text-gray-600">Tél : {req.guestPhone || '-'} | WhatsApp : {req.whatsapp || '-'}</p>
+                <p className="text-sm font-medium text-gray-800 mt-2 bg-gray-50 p-2 rounded-lg inline-block">
                   Du {req.checkIn.toLocaleDateString('fr-FR')} au {req.checkOut.toLocaleDateString('fr-FR')} ({req.guests} pers.)
                 </p>
+                {req.message && (
+                  <div className="mt-3 bg-blue-50 border border-blue-100 p-3 rounded-lg">
+                    <p className="text-xs font-bold text-blue-800 uppercase mb-1">Message du client :</p>
+                    <p className="text-sm text-gray-700 italic">"{req.message}"</p>
+                  </div>
+                )}
               </div>
               <BookingRequestActions 
                 requestId={req.id} 
