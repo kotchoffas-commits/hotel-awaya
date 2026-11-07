@@ -27,7 +27,8 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     });
     return NextResponse.json(updatedRoom);
   } catch (error: any) {
-    return NextResponse.json({ error: 'Erreur' }, { status: 500 });
+    console.error('[ADMIN ROOM UPDATE]', error);
+    return NextResponse.json({ error: 'Erreur lors de la mise à jour. Vérifiez vos données.' }, { status: 500 });
   }
 }
 
@@ -38,11 +39,10 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
 
   const { id } = await params;
   try {
-    // On supprime d'abord les réservations liées pour éviter les erreurs de clé étrangère
     await prisma.booking.deleteMany({ where: { roomId: id } });
     await prisma.room.delete({ where: { id } });
     return NextResponse.json({ success: true });
   } catch (error: any) {
-    return NextResponse.json({ error: 'Erreur lors de la suppression' }, { status: 500 });
+    return NextResponse.json({ error: 'Erreur lors de la suppression.' }, { status: 500 });
   }
 }
