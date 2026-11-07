@@ -106,6 +106,7 @@ export const BookingScalarFieldEnum = {
   totalAmount: 'totalAmount',
   currency: 'currency',
   status: 'status',
+  isNotified: 'isNotified',
   source: 'source',
   externalId: 'externalId',
   paymentMethod: 'paymentMethod',

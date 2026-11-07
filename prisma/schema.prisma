@@ -40,6 +40,7 @@ model Booking {
   totalAmount   Float
   currency      String        @default("CHF")
   status        BookingStatus @default(PENDING)
+  isNotified    Boolean       @default(false)
   source        BookingSource @default(DIRECT)
   externalId    String?       @unique
   paymentMethod PaymentMethod?
