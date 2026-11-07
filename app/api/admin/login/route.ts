@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
+export const dynamic = 'force-dynamic';
 import { prisma } from '@/lib/prisma';
+export const dynamic = 'force-dynamic';
 import bcrypt from 'bcryptjs';
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   try {
@@ -20,11 +23,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Identifiants invalides' }, { status: 401 });
     }
 
-    // On crée la réponse et on installe le cookie de session
+    // On crÃ©e la rÃ©ponse et on installe le cookie de session
     const res = NextResponse.json({ success: true });
     
     res.cookies.set('admin_session', 'true', {
-      httpOnly: true, // Empêche le vol du cookie par JavaScript
+      httpOnly: true, // EmpÃªche le vol du cookie par JavaScript
       secure: process.env.NODE_ENV === 'production',
       maxAge: 60 * 60 * 24, // Expire dans 24 heures
       path: '/',

@@ -1,25 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
+export const dynamic = 'force-dynamic';
 import { prisma } from '@/lib/prisma';
+export const dynamic = 'force-dynamic';
 import { cookies } from 'next/headers';
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
-  // Vérification de sécurité
+  // VÃ©rification de sÃ©curitÃ©
   const cookieStore = await cookies();
   const session = cookieStore.get('admin_session');
   if (!session || session.value !== 'true') {
-    return NextResponse.json({ error: 'Non autorisé' }, { status: 401 });
+    return NextResponse.json({ error: 'Non autorisÃ©' }, { status: 401 });
   }
 
   try {
     const body = await req.json();
 
-    // Vérifier si le slug existe déjà
+    // VÃ©rifier si le slug existe dÃ©jÃ 
     const existingRoom = await prisma.room.findUnique({
       where: { slug: body.slug }
     });
 
     if (existingRoom) {
-      return NextResponse.json({ error: 'Ce slug est déjà utilisé par une autre chambre' }, { status: 400 });
+      return NextResponse.json({ error: 'Ce slug est dÃ©jÃ  utilisÃ© par une autre chambre' }, { status: 400 });
     }
 
     const newRoom = await prisma.room.create({
@@ -41,6 +44,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(newRoom);
   } catch (error: any) {
     console.error('[ADMIN ROOM CREATE]', error);
-    return NextResponse.json({ error: 'Erreur lors de la création de la chambre' }, { status: 500 });
+    return NextResponse.json({ error: 'Erreur lors de la crÃ©ation de la chambre' }, { status: 500 });
   }
 }

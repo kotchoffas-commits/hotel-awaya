@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
+export const dynamic = 'force-dynamic';
 import { prisma } from '@/lib/prisma';
+export const dynamic = 'force-dynamic';
 import { getStripe } from '@/lib/stripe';
+export const dynamic = 'force-dynamic';
 import { Transaction } from '@/lib/fedapay';
+export const dynamic = 'force-dynamic';
 import { z } from 'zod';
+export const dynamic = 'force-dynamic';
 
 const schema = z.object({
   roomSlug: z.string().min(1),
