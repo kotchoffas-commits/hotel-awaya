@@ -4,7 +4,6 @@ import { prisma } from '@/lib/prisma';
 import { Link } from '@/i18n/navigation';
 import BookingStatusActions from '@/components/admin/BookingStatusActions';
 import CopyButton from '@/components/ui/CopyButton';
-import NotificationBell from '@/components/admin/NotificationBell';
 
 export const dynamic = 'force-dynamic';
 
