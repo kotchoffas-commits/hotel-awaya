@@ -1,13 +1,12 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Link, useRouter } from '@/i18n/navigation'; // <-- Utilisation de next-intl
+import { Link } from '@/i18n/navigation';
 import DecisionModal from '@/components/admin/DecisionModal';
 
 export default function NotificationsPage() {
   const [bookings, setBookings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedBooking, setSelectedBooking] = useState<any | null>(null);
-  const router = useRouter();
 
   const fetchPending = async () => {
     try {
@@ -75,7 +74,7 @@ export default function NotificationsPage() {
         <DecisionModal 
           booking={selectedBooking} 
           roomName={selectedBooking.room.nameFr} 
-          onClose={() => { setSelectedBooking(null); fetchPending(); router.refresh(); }} 
+          onClose={() => { setSelectedBooking(null); fetchPending(); }} 
         />
       )}
     </div>

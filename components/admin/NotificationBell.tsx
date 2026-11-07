@@ -1,10 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useRouter } from '@/i18n/navigation'; // <-- IMPORTANT : Le routeur multilingue
 
 export default function NotificationBell() {
   const [count, setCount] = useState(0);
-  const router = useRouter();
 
   const fetchNotifications = async () => {
     try {
@@ -21,10 +19,10 @@ export default function NotificationBell() {
   }, []);
 
   const handleClick = () => {
-    // 1. On cache le badge instantanément
     setCount(0);
-    // 2. On redirige vers la page (avec le bon /fr/)
-    router.push('/admin/notifications');
+    // On récupère la langue depuis l'URL pour construire le bon chemin
+    const locale = window.location.pathname.split('/')[1] || 'fr';
+    window.location.href = `/${locale}/admin/notifications`;
   };
 
   return (
