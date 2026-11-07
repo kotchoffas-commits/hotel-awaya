@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { Link } from '@/i18n/navigation';
 import BookingStatusActions from '@/components/admin/BookingStatusActions';
+import CopyButton from '@/components/ui/CopyButton';
 
 export default async function AdminDashboardPage({
   params,
@@ -67,11 +68,11 @@ export default async function AdminDashboardPage({
           <table className="w-full text-left text-sm">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="px-6 py-4 font-medium text-gray-900">Réf. / Client</th>
-                <th className="px-6 py-4 font-medium text-gray-900">Chambre</th>
-                <th className="px-6 py-4 font-medium text-gray-900">Dates</th>
-                <th className="px-6 py-4 font-medium text-gray-900">Statut</th>
-                <th className="px-6 py-4 font-medium text-gray-900 text-right">Total</th>
+                <th className="px-6 py-4 font-medium text-gray-900 w-1/4">Réf. & Client</th>
+                <th className="px-6 py-4 font-medium text-gray-900 w-1/5">Chambre</th>
+                <th className="px-6 py-4 font-medium text-gray-900 w-1/5">Dates</th>
+                <th className="px-6 py-4 font-medium text-gray-900 w-1/6">Statut</th>
+                <th className="px-6 py-4 font-medium text-gray-900 text-right w-1/6">Total</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
@@ -85,8 +86,11 @@ export default async function AdminDashboardPage({
                 bookings.map((booking) => (
                   <tr key={booking.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4">
-                      <div className="text-xs font-mono font-bold text-emerald-700 mb-1">
-                        {booking.reference || booking.id}
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded">
+                          {booking.reference || booking.id.slice(0, 8)}
+                        </span>
+                        <CopyButton text={booking.reference || booking.id} />
                       </div>
                       <div className="font-medium text-gray-900">{booking.guestName}</div>
                       <div className="text-gray-500 text-xs">{booking.guestEmail}</div>
@@ -94,15 +98,14 @@ export default async function AdminDashboardPage({
                     <td className="px-6 py-4 text-gray-600">
                       {locale === 'fr' ? booking.room.nameFr : booking.room.nameEn}
                     </td>
-                    <td className="px-6 py-4 text-gray-600">
-                      {booking.checkIn.toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-GB')} 
-                      {' → '} 
-                      {booking.checkOut.toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-GB')}
+                    <td className="px-6 py-4 text-gray-600 text-xs">
+                      <span className="block">Arrivée: {booking.checkIn.toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-GB')}</span>
+                      <span className="block">Départ: {booking.checkOut.toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-GB')}</span>
                     </td>
                     <td className="px-6 py-4">
                       <BookingStatusActions bookingId={booking.id} currentStatus={booking.status} />
                     </td>
-                    <td className="px-6 py-4 text-right font-medium text-gray-900">
+                    <td className="px-6 py-4 text-right font-medium text-emerald-700">
                       {booking.totalAmount} CHF
                     </td>
                   </tr>

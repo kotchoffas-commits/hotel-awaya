@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { prisma } from '@/lib/prisma';
+import CopyButton from '@/components/ui/CopyButton';
 
 export default async function ConfirmationPage({
   params,
@@ -58,9 +59,12 @@ export default async function ConfirmationPage({
 
       <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6 mb-6 text-center">
         <p className="text-sm text-emerald-800 font-medium mb-1">Votre numéro de réservation</p>
-        <p className="text-3xl font-mono font-bold text-emerald-950 tracking-wider">
-          {booking.reference || booking.id}
-        </p>
+        <div className="flex items-center justify-center gap-3">
+          <p className="text-3xl font-mono font-bold text-emerald-950 tracking-wider">
+            {booking.reference || booking.id}
+          </p>
+          <CopyButton text={booking.reference || booking.id} />
+        </div>
         <p className="text-xs text-emerald-600 mt-2">Gardez ce numéro pour suivre votre dossier.</p>
       </div>
 

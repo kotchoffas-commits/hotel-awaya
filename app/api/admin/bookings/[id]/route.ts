@@ -24,7 +24,8 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
       include: { room: true }
     });
 
-    if (oldBooking.status !== status && ['CONFIRMED', 'CANCELLED', 'COMPLETED'].includes(status)) {
+    // Déclenche l'email pour TOUS les changements de statut
+    if (oldBooking.status !== status) {
       await sendBookingStatusEmail(updatedBooking, updatedBooking.room.nameFr, status);
     }
 

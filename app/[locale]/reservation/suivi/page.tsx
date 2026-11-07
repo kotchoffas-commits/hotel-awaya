@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import CopyButton from '@/components/ui/CopyButton';
 
 export default function TrackingPage() {
   const [ref, setRef] = useState('');
@@ -54,7 +55,10 @@ export default function TrackingPage() {
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
             <div className="bg-emerald-950 p-6 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div>
-                <p className="text-emerald-300 text-sm mb-1">{booking.reference}</p>
+                <div className="flex items-center gap-2 mb-1">
+                  <p className="text-emerald-300 text-sm">{booking.reference}</p>
+                  <CopyButton text={booking.reference} />
+                </div>
                 <h2 className="font-serif text-xl font-bold">{booking.roomName}</h2>
               </div>
               <div className={`px-4 py-1.5 rounded-full text-sm font-medium border ${booking.status === 'CONFIRMED' ? 'bg-emerald-500/20 text-emerald-200 border-emerald-500/30' : 'bg-white/10 text-white border-white/20'}`}>
