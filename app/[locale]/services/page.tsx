@@ -16,7 +16,7 @@ export default async function ServicesPage() {
     <div className="bg-gray-50 min-h-screen py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="text-center mb-16 animate-fade-in-up">
-          <span className="text-emerald-600 font-semibold tracking-widest uppercase text-xs mb-3 block">Confort & Équipements</span>
+          <span className="text-emerald-600 font-semibold tracking-widest uppercase text-xs mb-3 block">{t('comfort')}</span>
           <h1 className="font-serif text-4xl md:text-5xl font-bold text-emerald-950 mb-4">{t('title')}</h1>
           <div className="w-24 h-1 bg-emerald-700 mx-auto rounded-full mb-6"></div>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">{t('subtitle')}</p>

@@ -35,7 +35,7 @@ export default async function RoomsPage({
     <div className="bg-gray-50 min-h-screen py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="text-center mb-16 animate-fade-in-up">
-          <span className="text-emerald-600 font-semibold tracking-widest uppercase text-xs mb-3 block">Hébergements</span>
+          <span className="text-emerald-600 font-semibold tracking-widest uppercase text-xs mb-3 block">{t('accommodations')}</span>
           <h1 className="font-serif text-4xl md:text-5xl font-bold text-emerald-950 mb-4">
             {t('title')}
           </h1>
@@ -65,11 +65,11 @@ export default async function RoomsPage({
                       <div className="w-full h-full flex items-center justify-center text-gray-400">{name}</div>
                     )}
                     
-                    {/* Badge Réservée */}
+                    {/* Badge {t('booked')} */}
                     {blocked && (
                       <div className="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        Réservée
+                        {t('booked')}
                       </div>
                     )}
                     
@@ -89,7 +89,7 @@ export default async function RoomsPage({
 
                     {blocked && (
                       <div className="bg-amber-50 border border-amber-200 text-amber-800 text-xs p-3 rounded-xl mb-4">
-                        <strong>Prochaines dates prises :</strong><br/>
+                        <strong>{t('nextDates')} :</strong><br/>
                         Du {blocked.checkIn.toLocaleDateString('fr-FR')} au {blocked.checkOut.toLocaleDateString('fr-FR')}
                       </div>
                     )}

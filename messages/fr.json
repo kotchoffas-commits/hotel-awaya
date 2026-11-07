@@ -9,7 +9,17 @@
     "perNight": "par nuit",
     "from": "À partir de",
     "guests": "personnes",
-    "bookNow": "Réserver"
+    "bookNow": "Réserver",
+    "whyUsTitle": "L'Expérience Awaya",
+    "whyUsSubtitle": "Bien plus qu'un séjour, un moment d'exception au cœur de la colline.",
+    "whyLocationTitle": "Emplacement Idéal",
+    "whyLocationDesc": "Situé au cœur de la colline, offrant une vue imprenable et un calme absolu.",
+    "whyComfortTitle": "Confort Premium",
+    "whyComfortDesc": "Des chambres spacieuses équipées de literie haut de gamme pour un sommeil parfait.",
+    "whyServiceTitle": "Service Personnalisé",
+    "whyServiceDesc": "Notre équipe est disponible 24h/24 pour répondre à toutes vos demandes.",
+    "testimonialsTitle": "Ce que disent nos clients",
+    "testimonialsSubtitle": "Témoignages"
   },
   "rooms": {
     "title": "Nos chambres",
@@ -39,7 +49,12 @@
       "room-service": "Service en chambre",
       "crib": "Lit bébé",
       "desk": "Bureau"
-    }
+    },
+    "accommodations": "Hébergements",
+    "nextDates": "Prochaines dates prises",
+    "about": "À propos de cette chambre",
+    "amenitiesList": "Ce que propose cette chambre",
+    "available": "Disponible"
   },
   "nav": {
     "home": "Accueil",
@@ -70,7 +85,11 @@
     "twint": "Twint",
     "mobileMoney": "Mobile Money",
     "success": "Réservation confirmée !",
-    "successMessage": "Email de confirmation envoyé."
+    "successMessage": "Email de confirmation envoyé.",
+    "finalizeTitle": "Finaliser ma réservation",
+    "finalizeSubtitle": "Plus qu'une étape avant votre séjour.",
+    "searchTitle": "Rechercher une chambre",
+    "searchSubtitle": "Sélectionnez une chambre depuis notre catalogue pour commencer votre réservation."
   },
   "footer": {
     "contact": "Contact",
@@ -116,7 +135,8 @@
     "roomService": {
       "title": "Service en Chambre",
       "desc": "Repas et boissons servis directement dans votre chambre."
-    }
+    },
+    "comfort": "Confort & Équipements"
   },
   "faq": {
     "title": "Questions Fréquentes",
@@ -169,7 +189,8 @@
     "all": "Tout",
     "rooms": "Chambres",
     "exterior": "Extérieur",
-    "facilities": "Équipements"
+    "facilities": "Équipements",
+    "discover": "Découvrir"
   },
   "rates": {
     "title": "Nos Tarifs",
@@ -179,6 +200,7 @@
     "price": "Prix par nuit",
     "book": "Réserver",
     "note": "* Les tarifs peuvent varier selon la saison et la durée du séjour.",
-    "from": "À partir de"
+    "from": "À partir de",
+    "pricing": "Tarification"
   }
 }

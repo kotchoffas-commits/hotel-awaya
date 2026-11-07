@@ -46,8 +46,8 @@ export default async function ReservationPage({
       <div className="bg-gray-50 min-h-screen py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 animate-fade-in-up">
-            <h1 className="font-serif text-4xl font-bold text-emerald-950 mb-2">Finaliser ma réservation</h1>
-            <p className="text-gray-600">Plus qu'une étape avant votre séjour.</p>
+            <h1 className="font-serif text-4xl font-bold text-emerald-950 mb-2">{t('finalizeTitle')}</h1>
+            <p className="text-gray-600">{t('finalizeSubtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fade-in-up delay-100">
@@ -85,8 +85,8 @@ export default async function ReservationPage({
         <div className="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
           <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
         </div>
-        <h1 className="font-serif text-3xl font-bold text-emerald-950 mb-3">Rechercher une chambre</h1>
-        <p className="text-gray-600 mb-8">Sélectionnez une chambre depuis notre catalogue pour commencer votre réservation.</p>
+        <h1 className="font-serif text-3xl font-bold text-emerald-950 mb-3">{t('searchTitle')}</h1>
+        <p className="text-gray-600 mb-8">{t('searchSubtitle')}</p>
         <Link href="/chambres" className="inline-block bg-emerald-700 text-white font-bold px-8 py-3 rounded-xl hover:bg-emerald-800 transition">
           Voir les chambres
         </Link>

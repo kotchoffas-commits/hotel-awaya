@@ -9,7 +9,17 @@
     "perNight": "per night",
     "from": "From",
     "guests": "guests",
-    "bookNow": "Book now"
+    "bookNow": "Book now",
+    "whyUsTitle": "The Awaya Experience",
+    "whyUsSubtitle": "More than just a stay, an exceptional moment in the heart of the hill.",
+    "whyLocationTitle": "Ideal Location",
+    "whyLocationDesc": "Located in the heart of the hill, offering breathtaking views and absolute calm.",
+    "whyComfortTitle": "Premium Comfort",
+    "whyComfortDesc": "Spacious rooms equipped with high-end bedding for perfect sleep.",
+    "whyServiceTitle": "Personalized Service",
+    "whyServiceDesc": "Our team is available 24/7 to answer all your requests.",
+    "testimonialsTitle": "What our clients say",
+    "testimonialsSubtitle": "Testimonials"
   },
   "rooms": {
     "title": "Our rooms",
@@ -39,7 +49,12 @@
       "room-service": "Room service",
       "crib": "Crib",
       "desk": "Desk"
-    }
+    },
+    "accommodations": "Accommodations",
+    "nextDates": "Next booked dates",
+    "about": "About this room",
+    "amenitiesList": "What this room offers",
+    "available": "Available"
   },
   "nav": {
     "home": "Home",
@@ -70,7 +85,11 @@
     "twint": "Twint",
     "mobileMoney": "Mobile Money",
     "success": "Booking confirmed!",
-    "successMessage": "Confirmation email sent."
+    "successMessage": "Confirmation email sent.",
+    "finalizeTitle": "Finalize my booking",
+    "finalizeSubtitle": "Just one step away from your stay.",
+    "searchTitle": "Search for a room",
+    "searchSubtitle": "Select a room from our catalog to start your booking."
   },
   "footer": {
     "contact": "Contact",
@@ -116,7 +135,8 @@
     "roomService": {
       "title": "Room Service",
       "desc": "Meals and drinks served directly in your room."
-    }
+    },
+    "comfort": "Comfort & Amenities"
   },
   "faq": {
     "title": "Frequently Asked Questions",
@@ -169,7 +189,8 @@
     "all": "All",
     "rooms": "Rooms",
     "exterior": "Exterior",
-    "facilities": "Facilities"
+    "facilities": "Facilities",
+    "discover": "Discover"
   },
   "rates": {
     "title": "Our Rates",
@@ -179,6 +200,7 @@
     "price": "Price per night",
     "book": "Book",
     "note": "* Rates may vary depending on the season and length of stay.",
-    "from": "From"
+    "from": "From",
+    "pricing": "Pricing"
   }
 }

@@ -49,12 +49,12 @@ export default async function RoomDetailPage({
             </div>
 
             <div>
-              <h2 className="font-serif text-2xl font-bold text-emerald-950 mb-4">À propos de cette chambre</h2>
+              <h2 className="font-serif text-2xl font-bold text-emerald-950 mb-4">{t('about')}</h2>
               <p className="text-gray-600 leading-relaxed text-lg">{desc}</p>
             </div>
 
             <div>
-              <h2 className="font-serif text-2xl font-bold text-emerald-950 mb-6">Ce que propose cette chambre</h2>
+              <h2 className="font-serif text-2xl font-bold text-emerald-950 mb-6">{t('amenitiesList')}</h2>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {amenities.map((a) => (
                   <div key={a} className="flex items-center gap-3 text-gray-700 bg-gray-50 p-4 rounded-2xl border border-gray-100">
