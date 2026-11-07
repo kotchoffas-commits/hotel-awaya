@@ -18,8 +18,20 @@ export default function TrackingRequestPage() {
 
     try {
       const res = await fetch(`/api/demandes/suivi?ref=${ref.trim()}`);
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
+      
+      // LECTURE ROBUSTE : On lit le texte d'abord pour éviter le crash si c'est du HTML
+      const text = await res.text();
+      let data: any = {};
+
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch (parseError) {
+        console.error('Erreur de format non-JSON:', text.substring(0, 100));
+        throw new Error(`Erreur serveur (${res.status}). Veuillez réessayer plus tard.`);
+      }
+
+      if (!res.ok) throw new Error(data.error || `Erreur (${res.status})`);
+      
       setRequest(data);
     } catch (err: any) {
       setError(err.message);
@@ -74,6 +86,13 @@ export default function TrackingRequestPage() {
                 <div><p className="text-sm text-gray-500 mb-1">Départ</p><p className="font-medium text-gray-900">{new Date(request.checkOut).toLocaleDateString('fr-FR')}</p></div>
                 <div><p className="text-sm text-gray-500 mb-1">Voyageurs</p><p className="font-medium text-gray-900">{request.guests} personne(s)</p></div>
               </div>
+
+              {request.message && (
+                <div className="bg-blue-50 border border-blue-100 p-4 rounded-xl mb-8">
+                  <p className="text-xs font-bold text-blue-800 uppercase mb-2">Votre message :</p>
+                  <p className="text-sm text-gray-700 italic">"{request.message}"</p>
+                </div>
+              )}
 
               <div className="border-t border-gray-100 pt-6 text-center">
                 <p className="text-sm text-gray-500">
