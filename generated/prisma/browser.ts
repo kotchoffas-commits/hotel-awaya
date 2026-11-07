@@ -28,12 +28,12 @@ export type Room = Prisma.RoomModel
  */
 export type Booking = Prisma.BookingModel
 /**
- * Model AdminUser
- * 
- */
-export type AdminUser = Prisma.AdminUserModel
-/**
  * Model PromoCode
  * 
  */
 export type PromoCode = Prisma.PromoCodeModel
+/**
+ * Model AdminUser
+ * 
+ */
+export type AdminUser = Prisma.AdminUserModel

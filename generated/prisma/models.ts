@@ -10,6 +10,6 @@
  */
 export type * from './models/Room'
 export type * from './models/Booking'
-export type * from './models/AdminUser'
 export type * from './models/PromoCode'
+export type * from './models/AdminUser'
 export type * from './commonInputTypes'

@@ -53,8 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Room: 'Room',
   Booking: 'Booking',
-  AdminUser: 'AdminUser',
-  PromoCode: 'PromoCode'
+  PromoCode: 'PromoCode',
+  AdminUser: 'AdminUser'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -107,7 +107,6 @@ export const BookingScalarFieldEnum = {
   totalAmount: 'totalAmount',
   currency: 'currency',
   status: 'status',
-  isNotified: 'isNotified',
   source: 'source',
   externalId: 'externalId',
   paymentMethod: 'paymentMethod',
@@ -122,6 +121,17 @@ export const BookingScalarFieldEnum = {
 export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
 
 
+export const PromoCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  discountPercent: 'discountPercent',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+} as const
+
+export type PromoCodeScalarFieldEnum = (typeof PromoCodeScalarFieldEnum)[keyof typeof PromoCodeScalarFieldEnum]
+
+
 export const AdminUserScalarFieldEnum = {
   id: 'id',
   email: 'email',
@@ -132,17 +142,6 @@ export const AdminUserScalarFieldEnum = {
 } as const
 
 export type AdminUserScalarFieldEnum = (typeof AdminUserScalarFieldEnum)[keyof typeof AdminUserScalarFieldEnum]
-
-
-export const PromoCodeScalarFieldEnum = {
-  id: 'id',
-  code: 'code',
-  discountPercent: 'discountPercent',
-  isActive: 'isActive',
-  createdAt: 'createdAt'
-} as const
-
-export type PromoCodeScalarFieldEnum = (typeof PromoCodeScalarFieldEnum)[keyof typeof PromoCodeScalarFieldEnum]
 
 
 export const SortOrder = {

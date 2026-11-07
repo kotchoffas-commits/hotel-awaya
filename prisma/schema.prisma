@@ -28,7 +28,7 @@ model Room {
 
 model Booking {
   id            String        @id @default(cuid())
-  reference   String?       @unique
+  reference     String?       @unique
   roomId        String
   room          Room          @relation(fields: [roomId], references: [id])
   guestName     String
@@ -40,20 +40,27 @@ model Booking {
   totalAmount   Float
   currency      String        @default("CHF")
   status        BookingStatus @default(PENDING)
-  isNotified    Boolean       @default(false)
   source        BookingSource @default(DIRECT)
   externalId    String?       @unique
   paymentMethod PaymentMethod?
   paymentId     String?
   notes         String?
-  
   promoCodeId   String?
+  promoCode     PromoCode?    @relation(fields: [promoCodeId], references: [id])
   discountApplied Float?
-
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 
   @@index([checkIn, checkOut])
+}
+
+model PromoCode {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  discountPercent Int
+  isActive        Boolean  @default(true)
+  bookings        Booking[]
+  createdAt       DateTime @default(now())
 }
 
 enum BookingStatus {
@@ -85,11 +92,4 @@ model AdminUser {
   name         String
   role         String   @default("admin")
   createdAt    DateTime @default(now())
-}
-model PromoCode {
-  id              String   @id @default(cuid())
-  code            String   @unique
-  discountPercent Int
-  isActive        Boolean  @default(true)
-  createdAt       DateTime @default(now())
 }
