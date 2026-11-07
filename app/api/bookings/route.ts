@@ -15,6 +15,8 @@ const schema = z.object({
   paymentMethod: z.enum(['STRIPE_CARD', 'TWINT', 'MOBILE_MONEY']),
 });
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -36,17 +38,27 @@ export async function POST(req: NextRequest) {
         AND: [{ checkIn: { lt: checkOut } }, { checkOut: { gt: checkIn } }],
       },
     });
+    if (existing) return NextResponse.json({ error: 'Cette chambre est déjà réservée pour ces dates.' }, { status: 409 });
+
+    // --- GÉNÉRATION DE LA RÉFÉRENCE COURTE ---
+    // On prend les 3 premières lettres du type de chambre (ex: DEL pour Deluxe)
+    const roomCode = room.slug.split('-').pop()?.substring(0, 3).toUpperCase() || 'CH';
+    let count = await prisma.booking.count({ where: { roomId: room.id } }) + 1;
+    let reference = `REF-${roomCode}-${count.toString().padStart(2, '0')}`;
     
-    // Message court et propre pour la surréservation
-    if (existing) {
-      return NextResponse.json({ error: 'Cette chambre est déjà réservée pour ces dates. Veuillez en choisir d\'autres.' }, { status: 409 });
+    // On s'assure que la référence n'existe pas déjà (au cas où)
+    while (await prisma.booking.findUnique({ where: { reference } })) {
+      count++;
+      reference = `REF-${roomCode}-${count.toString().padStart(2, '0')}`;
     }
+    // -----------------------------------------
 
     const nights = Math.max(1, Math.ceil((checkOut.getTime() - checkIn.getTime()) / 86400000));
     const total = nights * room.basePrice;
 
     const booking = await prisma.booking.create({
       data: {
+        reference: reference,
         roomId: room.id,
         guestName: data.guestName,
         guestEmail: data.guestEmail,
@@ -66,10 +78,10 @@ export async function POST(req: NextRequest) {
     if (data.paymentMethod === 'MOBILE_MONEY') {
       const xofAmount = Math.floor(total * 655);
       const transaction = await Transaction.create({
-        description: `Reservation Hotel Awaya - ${booking.id}`,
+        description: `Reservation Hotel Awaya - ${booking.reference}`,
         amount: xofAmount,
         currency: { iso: 'XOF' },
-        callback_url: `${process.env.NEXT_PUBLIC_SITE_URL}/fr/reservation/confirmation?booking=${booking.id}`,
+        callback_url: `${process.env.NEXT_PUBLIC_SITE_URL}/fr/reservation/confirmation?booking=${booking.reference}`,
         customer: {
           firstname: 'Client', lastname: 'Test', email: data.guestEmail,
           phone_number: { number: '', country: 'bj' }
@@ -77,7 +89,7 @@ export async function POST(req: NextRequest) {
       });
       const token = await transaction.generateToken();
       await prisma.booking.update({ where: { id: booking.id }, data: { paymentId: transaction.id.toString() } });
-      return NextResponse.json({ bookingId: booking.id, paymentUrl: token.url, total, nights });
+      return NextResponse.json({ bookingId: booking.reference, paymentUrl: token.url, total, nights });
     }
 
     const stripe = getStripe();
@@ -92,11 +104,10 @@ export async function POST(req: NextRequest) {
 
     await prisma.booking.update({ where: { id: booking.id }, data: { paymentId: paymentIntent.id } });
 
-    return NextResponse.json({ bookingId: booking.id, clientSecret: paymentIntent.client_secret, total, nights });
+    return NextResponse.json({ bookingId: booking.reference, clientSecret: paymentIntent.client_secret, total, nights });
 
   } catch (err: any) {
-    // On masque l'erreur technique pour le client
-    console.error('[bookings/POST] Erreur technique:', err);
-    return NextResponse.json({ error: 'Une erreur est survenue lors du traitement. Veuillez réessayer plus tard.' }, { status: 500 });
+    console.error('[bookings/POST]', err);
+    return NextResponse.json({ error: 'Une erreur est survenue. Veuillez réessayer.' }, { status: 500 });
   }
 }

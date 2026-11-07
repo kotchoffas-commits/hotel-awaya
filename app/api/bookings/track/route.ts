@@ -5,19 +5,19 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const bookingId = searchParams.get('id');
+  const ref = searchParams.get('ref');
 
-  if (!bookingId) return NextResponse.json({ error: 'Numéro de réservation manquant' }, { status: 400 });
+  if (!ref) return NextResponse.json({ error: 'Référence manquante' }, { status: 400 });
 
   const booking = await prisma.booking.findUnique({
-    where: { id: bookingId },
+    where: { reference: ref.trim().toUpperCase() },
     include: { room: true }
   });
 
-  if (!booking) return NextResponse.json({ error: 'Aucune réservation trouvée avec ce numéro.' }, { status: 404 });
+  if (!booking) return NextResponse.json({ error: 'Aucune réservation trouvée avec cette référence.' }, { status: 404 });
 
   return NextResponse.json({
-    id: booking.id,
+    reference: booking.reference,
     guestName: booking.guestName,
     roomName: booking.room.nameFr,
     checkIn: booking.checkIn,

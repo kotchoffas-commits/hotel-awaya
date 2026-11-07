@@ -38,6 +38,7 @@ export type BookingSumAggregateOutputType = {
 
 export type BookingMinAggregateOutputType = {
   id: string | null
+  reference: string | null
   roomId: string | null
   guestName: string | null
   guestEmail: string | null
@@ -59,6 +60,7 @@ export type BookingMinAggregateOutputType = {
 
 export type BookingMaxAggregateOutputType = {
   id: string | null
+  reference: string | null
   roomId: string | null
   guestName: string | null
   guestEmail: string | null
@@ -80,6 +82,7 @@ export type BookingMaxAggregateOutputType = {
 
 export type BookingCountAggregateOutputType = {
   id: number
+  reference: number
   roomId: number
   guestName: number
   guestEmail: number
@@ -113,6 +116,7 @@ export type BookingSumAggregateInputType = {
 
 export type BookingMinAggregateInputType = {
   id?: true
+  reference?: true
   roomId?: true
   guestName?: true
   guestEmail?: true
@@ -134,6 +138,7 @@ export type BookingMinAggregateInputType = {
 
 export type BookingMaxAggregateInputType = {
   id?: true
+  reference?: true
   roomId?: true
   guestName?: true
   guestEmail?: true
@@ -155,6 +160,7 @@ export type BookingMaxAggregateInputType = {
 
 export type BookingCountAggregateInputType = {
   id?: true
+  reference?: true
   roomId?: true
   guestName?: true
   guestEmail?: true
@@ -263,6 +269,7 @@ export type BookingGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type BookingGroupByOutputType = {
   id: string
+  reference: string | null
   roomId: string
   guestName: string
   guestEmail: string
@@ -307,6 +314,7 @@ export type BookingWhereInput = {
   OR?: Prisma.BookingWhereInput[]
   NOT?: Prisma.BookingWhereInput | Prisma.BookingWhereInput[]
   id?: Prisma.StringFilter<"Booking"> | string
+  reference?: Prisma.StringNullableFilter<"Booking"> | string | null
   roomId?: Prisma.StringFilter<"Booking"> | string
   guestName?: Prisma.StringFilter<"Booking"> | string
   guestEmail?: Prisma.StringFilter<"Booking"> | string
@@ -329,6 +337,7 @@ export type BookingWhereInput = {
 
 export type BookingOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  reference?: Prisma.SortOrderInput | Prisma.SortOrder
   roomId?: Prisma.SortOrder
   guestName?: Prisma.SortOrder
   guestEmail?: Prisma.SortOrder
@@ -351,6 +360,7 @@ export type BookingOrderByWithRelationInput = {
 
 export type BookingWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  reference?: string
   externalId?: string
   AND?: Prisma.BookingWhereInput | Prisma.BookingWhereInput[]
   OR?: Prisma.BookingWhereInput[]
@@ -372,10 +382,11 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
-}, "id" | "externalId">
+}, "id" | "reference" | "externalId">
 
 export type BookingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  reference?: Prisma.SortOrderInput | Prisma.SortOrder
   roomId?: Prisma.SortOrder
   guestName?: Prisma.SortOrder
   guestEmail?: Prisma.SortOrder
@@ -405,6 +416,7 @@ export type BookingScalarWhereWithAggregatesInput = {
   OR?: Prisma.BookingScalarWhereWithAggregatesInput[]
   NOT?: Prisma.BookingScalarWhereWithAggregatesInput | Prisma.BookingScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Booking"> | string
+  reference?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
   roomId?: Prisma.StringWithAggregatesFilter<"Booking"> | string
   guestName?: Prisma.StringWithAggregatesFilter<"Booking"> | string
   guestEmail?: Prisma.StringWithAggregatesFilter<"Booking"> | string
@@ -426,6 +438,7 @@ export type BookingScalarWhereWithAggregatesInput = {
 
 export type BookingCreateInput = {
   id?: string
+  reference?: string | null
   guestName: string
   guestEmail: string
   guestPhone?: string | null
@@ -447,6 +460,7 @@ export type BookingCreateInput = {
 
 export type BookingUncheckedCreateInput = {
   id?: string
+  reference?: string | null
   roomId: string
   guestName: string
   guestEmail: string
@@ -468,6 +482,7 @@ export type BookingUncheckedCreateInput = {
 
 export type BookingUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
   guestPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -489,6 +504,7 @@ export type BookingUpdateInput = {
 
 export type BookingUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roomId?: Prisma.StringFieldUpdateOperationsInput | string
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
@@ -510,6 +526,7 @@ export type BookingUncheckedUpdateInput = {
 
 export type BookingCreateManyInput = {
   id?: string
+  reference?: string | null
   roomId: string
   guestName: string
   guestEmail: string
@@ -531,6 +548,7 @@ export type BookingCreateManyInput = {
 
 export type BookingUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
   guestPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -551,6 +569,7 @@ export type BookingUpdateManyMutationInput = {
 
 export type BookingUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roomId?: Prisma.StringFieldUpdateOperationsInput | string
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
@@ -582,6 +601,7 @@ export type BookingOrderByRelationAggregateInput = {
 
 export type BookingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  reference?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   guestName?: Prisma.SortOrder
   guestEmail?: Prisma.SortOrder
@@ -608,6 +628,7 @@ export type BookingAvgOrderByAggregateInput = {
 
 export type BookingMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  reference?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   guestName?: Prisma.SortOrder
   guestEmail?: Prisma.SortOrder
@@ -629,6 +650,7 @@ export type BookingMaxOrderByAggregateInput = {
 
 export type BookingMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  reference?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   guestName?: Prisma.SortOrder
   guestEmail?: Prisma.SortOrder
@@ -709,6 +731,7 @@ export type NullableEnumPaymentMethodFieldUpdateOperationsInput = {
 
 export type BookingCreateWithoutRoomInput = {
   id?: string
+  reference?: string | null
   guestName: string
   guestEmail: string
   guestPhone?: string | null
@@ -729,6 +752,7 @@ export type BookingCreateWithoutRoomInput = {
 
 export type BookingUncheckedCreateWithoutRoomInput = {
   id?: string
+  reference?: string | null
   guestName: string
   guestEmail: string
   guestPhone?: string | null
@@ -778,6 +802,7 @@ export type BookingScalarWhereInput = {
   OR?: Prisma.BookingScalarWhereInput[]
   NOT?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
   id?: Prisma.StringFilter<"Booking"> | string
+  reference?: Prisma.StringNullableFilter<"Booking"> | string | null
   roomId?: Prisma.StringFilter<"Booking"> | string
   guestName?: Prisma.StringFilter<"Booking"> | string
   guestEmail?: Prisma.StringFilter<"Booking"> | string
@@ -799,6 +824,7 @@ export type BookingScalarWhereInput = {
 
 export type BookingCreateManyRoomInput = {
   id?: string
+  reference?: string | null
   guestName: string
   guestEmail: string
   guestPhone?: string | null
@@ -819,6 +845,7 @@ export type BookingCreateManyRoomInput = {
 
 export type BookingUpdateWithoutRoomInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
   guestPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -839,6 +866,7 @@ export type BookingUpdateWithoutRoomInput = {
 
 export type BookingUncheckedUpdateWithoutRoomInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
   guestPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -859,6 +887,7 @@ export type BookingUncheckedUpdateWithoutRoomInput = {
 
 export type BookingUncheckedUpdateManyWithoutRoomInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   guestName?: Prisma.StringFieldUpdateOperationsInput | string
   guestEmail?: Prisma.StringFieldUpdateOperationsInput | string
   guestPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -881,6 +910,7 @@ export type BookingUncheckedUpdateManyWithoutRoomInput = {
 
 export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  reference?: boolean
   roomId?: boolean
   guestName?: boolean
   guestEmail?: boolean
@@ -903,6 +933,7 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 
 export type BookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  reference?: boolean
   roomId?: boolean
   guestName?: boolean
   guestEmail?: boolean
@@ -925,6 +956,7 @@ export type BookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type BookingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  reference?: boolean
   roomId?: boolean
   guestName?: boolean
   guestEmail?: boolean
@@ -947,6 +979,7 @@ export type BookingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type BookingSelectScalar = {
   id?: boolean
+  reference?: boolean
   roomId?: boolean
   guestName?: boolean
   guestEmail?: boolean
@@ -966,7 +999,7 @@ export type BookingSelectScalar = {
   updatedAt?: boolean
 }
 
-export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "roomId" | "guestName" | "guestEmail" | "guestPhone" | "checkIn" | "checkOut" | "guests" | "totalAmount" | "currency" | "status" | "source" | "externalId" | "paymentMethod" | "paymentId" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
+export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reference" | "roomId" | "guestName" | "guestEmail" | "guestPhone" | "checkIn" | "checkOut" | "guests" | "totalAmount" | "currency" | "status" | "source" | "externalId" | "paymentMethod" | "paymentId" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
 export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }
@@ -984,6 +1017,7 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    reference: string | null
     roomId: string
     guestName: string
     guestEmail: string
@@ -1426,6 +1460,7 @@ export interface Prisma__BookingClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface BookingFieldRefs {
   readonly id: Prisma.FieldRef<"Booking", 'String'>
+  readonly reference: Prisma.FieldRef<"Booking", 'String'>
   readonly roomId: Prisma.FieldRef<"Booking", 'String'>
   readonly guestName: Prisma.FieldRef<"Booking", 'String'>
   readonly guestEmail: Prisma.FieldRef<"Booking", 'String'>

@@ -24,8 +24,8 @@ export default async function ConfirmationPage({
     );
   }
 
-  const booking = await prisma.booking.findUnique({
-    where: { id: sp.booking },
+  const booking = await prisma.booking.findFirst({
+    where: { OR: [{ id: sp.booking }, { reference: sp.booking }] },
     include: { room: true },
   });
 
@@ -56,15 +56,19 @@ export default async function ConfirmationPage({
         <p className="text-gray-600">{t('successMessage')}</p>
       </div>
 
+      <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6 mb-6 text-center">
+        <p className="text-sm text-emerald-800 font-medium mb-1">Votre numéro de réservation</p>
+        <p className="text-3xl font-mono font-bold text-emerald-950 tracking-wider">
+          {booking.reference || booking.id}
+        </p>
+        <p className="text-xs text-emerald-600 mt-2">Gardez ce numéro pour suivre votre dossier.</p>
+      </div>
+
       <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
         <h2 className="font-serif text-xl font-bold text-emerald-900 mb-4">
           {"R\u00e9capitulatif"}
         </h2>
         <dl className="space-y-3 text-sm">
-          <div className="flex justify-between border-b border-gray-100 pb-2">
-            <dt className="text-gray-500">{"Num\u00e9ro de r\u00e9servation"}</dt>
-            <dd className="font-mono text-xs">{booking.id}</dd>
-          </div>
           <div className="flex justify-between border-b border-gray-100 pb-2">
             <dt className="text-gray-500">{"Chambre"}</dt>
             <dd className="font-medium">{roomName}</dd>
@@ -94,33 +98,11 @@ export default async function ConfirmationPage({
         </dl>
       </div>
 
-      <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
-        <h2 className="font-serif text-xl font-bold text-emerald-900 mb-4">
-          {"Vos coordonn\u00e9es"}
-        </h2>
-        <dl className="space-y-2 text-sm">
-          <div className="flex justify-between">
-            <dt className="text-gray-500">{"Nom"}</dt>
-            <dd className="font-medium">{booking.guestName}</dd>
-          </div>
-          <div className="flex justify-between">
-            <dt className="text-gray-500">{"Email"}</dt>
-            <dd className="font-medium">{booking.guestEmail}</dd>
-          </div>
-          {booking.guestPhone && (
-            <div className="flex justify-between">
-              <dt className="text-gray-500">{"T\u00e9l\u00e9phone"}</dt>
-              <dd className="font-medium">{booking.guestPhone}</dd>
-            </div>
-          )}
-        </dl>
-      </div>
-
-      <div className="text-center">
-        <Link
-          href="/"
-          className="inline-block bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-6 py-3 rounded-lg transition"
-        >
+      <div className="text-center flex flex-col sm:flex-row justify-center gap-4">
+        <Link href={`/reservation/suivi?ref=${booking.reference}`} className="inline-block bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-6 py-3 rounded-lg transition">
+          Suivre ma réservation
+        </Link>
+        <Link href="/" className="inline-block bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium px-6 py-3 rounded-lg transition">
           {"Retour \u00e0 l\u2019accueil"}
         </Link>
       </div>

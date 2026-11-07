@@ -67,7 +67,7 @@ export default async function AdminDashboardPage({
           <table className="w-full text-left text-sm">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="px-6 py-4 font-medium text-gray-900">Client</th>
+                <th className="px-6 py-4 font-medium text-gray-900">Réf. / Client</th>
                 <th className="px-6 py-4 font-medium text-gray-900">Chambre</th>
                 <th className="px-6 py-4 font-medium text-gray-900">Dates</th>
                 <th className="px-6 py-4 font-medium text-gray-900">Statut</th>
@@ -85,6 +85,9 @@ export default async function AdminDashboardPage({
                 bookings.map((booking) => (
                   <tr key={booking.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4">
+                      <div className="text-xs font-mono font-bold text-emerald-700 mb-1">
+                        {booking.reference || booking.id}
+                      </div>
                       <div className="font-medium text-gray-900">{booking.guestName}</div>
                       <div className="text-gray-500 text-xs">{booking.guestEmail}</div>
                     </td>
