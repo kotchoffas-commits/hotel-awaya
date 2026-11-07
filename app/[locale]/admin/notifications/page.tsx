@@ -2,69 +2,97 @@ import { prisma } from '@/lib/prisma';
 import { Link } from '@/i18n/navigation';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import BookingRequestActions from '@/components/admin/BookingRequestActions';
 
 export const dynamic = 'force-dynamic';
 
 export default async function NotificationsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  
-  const cookieStore = await cookies();
-  if (cookieStore.get('admin_session')?.value !== 'true') {
-    redirect(`/${locale}/admin/login`);
-  }
+  if ((await cookies()).get('admin_session')?.value !== 'true') redirect(`/${locale}/admin/login`);
 
-  // 1. On récupère les réservations en attente
-  const pendingBookings = await prisma.booking.findMany({
+  // On récupère TOUTES les demandes en attente
+  const requests = await prisma.bookingRequest.findMany({
+    where: { status: 'PENDING' },
+    orderBy: { createdAt: 'desc' },
+  });
+
+  // On récupère TOUTES les réservations en attente
+  const bookings = await prisma.booking.findMany({
     where: { status: 'PENDING' },
     include: { room: true },
     orderBy: { createdAt: 'desc' },
   });
 
-  // 2. DÈS QU'ON OUVRE LA PAGE, ON MARQUE TOUT COMME "LU" DANS LA BASE
-  if (pendingBookings.length > 0) {
-    await prisma.booking.updateMany({
-      where: { status: 'PENDING', isNotified: false },
-      data: { isNotified: true }
-    });
+  // Une fois la page ouverte, on marque tout comme "Lu" (la cloche disparaît)
+  if (requests.length > 0 || bookings.length > 0) {
+    await prisma.bookingRequest.updateMany({ where: { status: 'PENDING', isNotified: false }, data: { isNotified: true } });
+    await prisma.booking.updateMany({ where: { status: 'PENDING', isNotified: false }, data: { isNotified: true } });
   }
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12 min-h-screen">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-emerald-900">Notifications</h1>
-          <p className="text-gray-500 text-sm mt-1">Réservations en attente de validation</p>
+          <h1 className="font-serif text-3xl font-bold text-emerald-900">Centre de notifications</h1>
+          <p className="text-gray-500 text-sm mt-1">Demandes et réservations en attente</p>
         </div>
-        <Link href="/admin/dashboard" className="text-sm font-medium text-gray-600 hover:text-emerald-700 bg-gray-100 px-4 py-2 rounded-lg">
-          ← Retour au tableau de bord
-        </Link>
+        <Link href="/admin/dashboard" className="text-sm font-medium text-gray-600 hover:text-emerald-700 bg-gray-100 px-4 py-2 rounded-lg">← Retour</Link>
       </div>
 
-      {pendingBookings.length === 0 ? (
-        <div className="text-center py-20 bg-white rounded-2xl border border-gray-100 shadow-sm">
-          <div className="w-16 h-16 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-          </div>
-          <h2 className="text-xl font-medium text-gray-900">Vous êtes à jour !</h2>
-          <p className="text-gray-500 mt-2">Aucune nouvelle réservation en attente.</p>
+      {/* SECTION DEMANDES */}
+      <h2 className="text-xl font-bold text-gray-800 mb-4">Demandes de disponibilité ({requests.length})</h2>
+      
+      {requests.length === 0 ? (
+        <div className="text-center py-8 bg-gray-50 rounded-xl border border-gray-200 mb-12">
+          <p className="text-gray-500 text-sm">Aucune demande en attente.</p>
+        </div>
+      ) : (
+        <div className="space-y-4 mb-12">
+          {requests.map((req) => (
+            <div key={req.id} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded-full">Demande</span>
+                  <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">{req.reference}</span>
+                </div>
+                <h3 className="font-bold text-lg text-gray-900">{req.guestName}</h3>
+                <p className="text-sm text-gray-600">{req.guestEmail} • {req.guestPhone || 'Pas de tél.'}</p>
+                <p className="text-sm font-medium text-gray-800 mt-2">
+                  Du {req.checkIn.toLocaleDateString('fr-FR')} au {req.checkOut.toLocaleDateString('fr-FR')} ({req.guests} pers.)
+                </p>
+              </div>
+              <BookingRequestActions 
+                requestId={req.id} 
+                currentStatus={req.status} 
+                guestEmail={req.guestEmail} 
+                guestName={req.guestName} 
+                reference={req.reference} 
+                checkIn={req.checkIn} 
+                checkOut={req.checkOut} 
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* SECTION RÉSERVATIONS */}
+      <h2 className="text-xl font-bold text-gray-800 mb-4">Réservations en attente de paiement ({bookings.length})</h2>
+      
+      {bookings.length === 0 ? (
+        <div className="text-center py-8 bg-gray-50 rounded-xl border border-gray-200">
+          <p className="text-gray-500 text-sm">Aucune réservation en attente.</p>
         </div>
       ) : (
         <div className="space-y-4">
-          {pendingBookings.map((booking) => (
-            <div key={booking.id} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          {bookings.map((b) => (
+            <div key={b.id} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm flex justify-between items-center">
               <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded-full">En attente</span>
-                  <span className="text-xs font-mono font-bold text-gray-500">{booking.reference}</span>
-                </div>
-                <h3 className="font-bold text-lg text-gray-900">{booking.guestName}</h3>
-                <p className="text-sm text-gray-600">{booking.room.nameFr} • {booking.checkIn.toLocaleDateString('fr-FR')} au {booking.checkOut.toLocaleDateString('fr-FR')}</p>
+                <span className="text-xs font-mono font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded mb-2 inline-block">{b.reference}</span>
+                <h3 className="font-bold text-gray-900">{b.guestName}</h3>
+                <p className="text-sm text-gray-500">{b.room.nameFr}</p>
               </div>
-              <Link 
-                href="/admin/dashboard" 
-                className="bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-5 py-2.5 rounded-lg transition shadow-sm whitespace-nowrap"
-              >
-                Gérer sur le tableau de bord
+              <Link href="/admin/dashboard" className="text-emerald-700 font-medium text-sm hover:underline">
+                Gérer →
               </Link>
             </div>
           ))}
