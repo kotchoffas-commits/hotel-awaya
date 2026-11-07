@@ -11,21 +11,22 @@ export async function POST(req: NextRequest) {
     }
     
     const body = await req.json();
-    const code = body.code;
+    
+    // LA CORRECTION EST ICI : .trim() supprime les espaces avant et après
+    const code = body.code.trim().toUpperCase(); 
     const discount = parseInt(body.discount);
 
     if (!code || !discount) {
       return NextResponse.json({ error: 'Données manquantes' }, { status: 400 });
     }
 
-    // Vérifier si le code existe déjà
-    const existing = await prisma.promoCode.findUnique({ where: { code: code.toUpperCase() } });
+    const existing = await prisma.promoCode.findUnique({ where: { code } });
     if (existing) {
       return NextResponse.json({ error: 'Ce code existe déjà' }, { status: 400 });
     }
 
     const newPromo = await prisma.promoCode.create({ 
-      data: { code: code.toUpperCase(), discountPercent: discount } 
+      data: { code, discountPercent: discount } 
     });
 
     return NextResponse.json(newPromo);
