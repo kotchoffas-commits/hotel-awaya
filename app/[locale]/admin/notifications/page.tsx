@@ -13,11 +13,20 @@ export default async function NotificationsPage({ params }: { params: Promise<{ 
     redirect(`/${locale}/admin/login`);
   }
 
+  // 1. On récupère les réservations en attente
   const pendingBookings = await prisma.booking.findMany({
     where: { status: 'PENDING' },
     include: { room: true },
     orderBy: { createdAt: 'desc' },
   });
+
+  // 2. DÈS QU'ON OUVRE LA PAGE, ON MARQUE TOUT COMME "LU" DANS LA BASE
+  if (pendingBookings.length > 0) {
+    await prisma.booking.updateMany({
+      where: { status: 'PENDING', isNotified: false },
+      data: { isNotified: true }
+    });
+  }
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12 min-h-screen">
