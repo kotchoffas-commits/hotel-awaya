@@ -1,4 +1,4 @@
-import type { NextConfig } from 'next';
+﻿import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
@@ -6,10 +6,7 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 const nextConfig: NextConfig = {
   turbopack: {},
   images: {
-    remotePatterns: [{ protocol: 'https', hostname: '**' }],
-  },
-  typescript: {
-    ignoreBuildErrors: true,
+    remotePatterns: [{ protocol: 'https', hostname: 'res.cloudinary.com' }],
   },
 };
 

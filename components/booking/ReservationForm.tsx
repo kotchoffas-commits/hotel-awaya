@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
@@ -47,6 +47,14 @@ function CheckoutForm({ bookingId, locale }: { bookingId: string; locale: string
     </form>
   );
 }
+
+type Props = {
+  roomSlug: string;
+  checkIn: string;
+  checkOut: string;
+  guests: number;
+  basePrice: number;
+};
 
 export default function ReservationForm({ roomSlug, checkIn, checkOut, guests, basePrice }: Props) {
   const t = useTranslations('booking');
