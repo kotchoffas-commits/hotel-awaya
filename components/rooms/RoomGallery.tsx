@@ -34,11 +34,7 @@ export default function RoomGallery({ images, name }: { images: string[], name: 
                   : 'opacity-70 hover:opacity-100'
               }`}
             >
-              <img
-                src={img}
-                alt={`${name} miniature ${i + 1}`}
-                className="w-full h-full object-cover"
-              />
+              <Image src={img} alt={`${name} miniature ${i + 1}`} fill sizes="20vw" className="object-cover" />
             </button>
           ))}
         </div>
