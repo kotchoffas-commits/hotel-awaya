@@ -1,9 +1,44 @@
-import { getTranslations } from 'next-intl/server';
+﻿import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/navigation';
 import { prisma } from '@/lib/prisma';
 import RoomGallery from '@/components/rooms/RoomGallery';
 import ShareButton from '@/components/ui/ShareButton';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://hotel-awaya.com';
+  const room = await prisma.room.findUnique({ where: { slug } });
+  if (!room) return { title: 'Chambre introuvable' };
+  const name = locale === 'fr' ? room.nameFr : room.nameEn;
+  const desc = locale === 'fr' ? room.descFr : room.descEn;
+  const images = JSON.parse(room.images) as string[];
+  const path = '/chambres/' + slug;
+  const url = siteUrl + '/' + locale + path;
+  const ogImages = images[0]
+    ? [{ url: images[0], width: 1200, height: 630, alt: name }]
+    : [];
+  return {
+    title: name,
+    description: desc.substring(0, 160),
+    alternates: {
+      canonical: url,
+      languages: { fr: siteUrl + '/fr' + path, en: siteUrl + '/en' + path },
+    },
+    openGraph: {
+      title: name,
+      description: desc.substring(0, 160),
+      url,
+      locale: locale === 'fr' ? 'fr_FR' : 'en_US',
+      images: ogImages,
+    },
+  };
+}
 
 export default async function RoomDetailPage({
   params,

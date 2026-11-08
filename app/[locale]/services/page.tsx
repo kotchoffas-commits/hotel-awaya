@@ -1,4 +1,31 @@
-import { getTranslations } from 'next-intl/server';
+﻿import { getTranslations } from 'next-intl/server';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'services' });
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://hotel-awaya.com';
+  const path = '/services';
+  const url = siteUrl + '/' + locale + path;
+  return {
+    title: t('title'),
+    description: t('subtitle'),
+    alternates: {
+      canonical: url,
+      languages: { fr: siteUrl + '/fr' + path, en: siteUrl + '/en' + path },
+    },
+    openGraph: {
+      title: t('title'),
+      description: t('subtitle'),
+      url,
+      locale: locale === 'fr' ? 'fr_FR' : 'en_US',
+    },
+  };
+}
 
 export default async function ServicesPage() {
   const t = await getTranslations('services');

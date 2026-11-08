@@ -1,6 +1,33 @@
-import { getTranslations } from 'next-intl/server';
+﻿import { getTranslations } from 'next-intl/server';
 import { prisma } from '@/lib/prisma';
 import { Link } from '@/i18n/navigation';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'rates' });
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://hotel-awaya.com';
+  const path = '/tarifs';
+  const url = siteUrl + '/' + locale + path;
+  return {
+    title: t('title'),
+    description: t('subtitle'),
+    alternates: {
+      canonical: url,
+      languages: { fr: siteUrl + '/fr' + path, en: siteUrl + '/en' + path },
+    },
+    openGraph: {
+      title: t('title'),
+      description: t('subtitle'),
+      url,
+      locale: locale === 'fr' ? 'fr_FR' : 'en_US',
+    },
+  };
+}
 
 export default async function RatesPage({
   params,
