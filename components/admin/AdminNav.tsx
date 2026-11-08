@@ -12,6 +12,7 @@ export default function AdminNav() {
     { href: '/admin/rooms', label: 'Chambres' },
     { href: '/admin/requests', label: 'Demandes' },
     { href: '/admin/promos', label: 'Codes Promo' },
+    { href: '/admin/sponsors', label: 'Sponsors' },
   ];
 
   return (

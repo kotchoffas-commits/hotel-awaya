@@ -31,6 +31,7 @@ export default function Footer() {
               <li><Link href="/services" className="hover:text-white transition">{tNav('services')}</Link></li>
               <li><Link href="/galerie" className="hover:text-white transition">{tNav('gallery')}</Link></li>
               <li><Link href="/faq" className="hover:text-white transition">{tNav('faq')}</Link></li>
+              <li><Link href="/partenaires" className="hover:text-white transition">Devenir partenaire</Link></li>
             </ul>
           </div>
 
