@@ -1,6 +1,7 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function RoomGallery({ images, name }: { images: string[], name: string }) {
   const [mainImage, setMainImage] = useState(images[0]);
@@ -17,11 +18,7 @@ export default function RoomGallery({ images, name }: { images: string[], name: 
     <div className="space-y-4">
       {/* Image principale */}
       <div className="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-        <img
-          src={mainImage}
-          alt={name}
-          className="w-full h-full object-cover transition-opacity duration-300"
-        />
+        <Image src={mainImage} alt={name} fill sizes="(max-width: 768px) 100vw, 800px" className="object-cover transition-opacity duration-300" />
       </div>
 
       {/* Miniatures */}

@@ -1,8 +1,9 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef } from 'react';
 import { useRouter } from '@/i18n/navigation';
 import { Link } from '@/i18n/navigation';
+import Image from 'next/image';
 
 export default function RoomEditForm({ room, locale }: { room: any | null, locale: string }) {
   const router = useRouter();
@@ -176,7 +177,7 @@ export default function RoomEditForm({ room, locale }: { room: any | null, local
         <div className="flex flex-wrap gap-4 mb-4">
           {formData.images.map((img: string, idx: number) => (
             <div key={idx} className="relative group w-32 h-24 rounded-lg overflow-hidden border border-gray-200">
-              <img src={img} alt={`Room ${idx}`} className="w-full h-full object-cover" />
+              <Image src={img} alt={`Room ${idx}`} width={128} height={96} className="w-full h-full object-cover" />
               <button type="button" onClick={() => removeImage(idx)} className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition shadow-sm">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
               </button>

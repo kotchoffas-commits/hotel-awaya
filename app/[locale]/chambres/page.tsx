@@ -1,6 +1,7 @@
-import { getTranslations } from 'next-intl/server';
+﻿import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { prisma } from '@/lib/prisma';
+import Image from 'next/image';
 
 export const dynamic = 'force-dynamic';
 
@@ -60,7 +61,7 @@ export default async function RoomsPage({
                 >
                   <div className="relative h-72 overflow-hidden bg-gray-100">
                     {images[0] ? (
-                      <img src={images[0]} alt={name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700 ease-in-out" />
+                      <Image src={images[0]} alt={name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-110 transition duration-700 ease-in-out" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-gray-400">{name}</div>
                     )}

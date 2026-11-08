@@ -1,7 +1,8 @@
-import { getTranslations } from 'next-intl/server';
+﻿import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { prisma } from '@/lib/prisma';
 import ReservationForm from '@/components/booking/ReservationForm';
+import Image from 'next/image';
 
 export const dynamic = 'force-dynamic';
 
@@ -57,7 +58,7 @@ export default async function ReservationPage({
             
             <aside className="lg:col-span-1">
               <div className="sticky top-24 bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-xl shadow-gray-200/50">
-                {images[0] && <img src={images[0]} alt={name} className="w-full h-48 object-cover" />}
+                {images[0] && <Image src={images[0]} alt={name} width={800} height={192} className="w-full h-48 object-cover" />}
                 <div className="p-8">
                   <h3 className="font-serif text-xl font-bold text-emerald-950 mb-4">{name}</h3>
                   <div className="space-y-3 text-sm text-gray-600 mb-6 pb-6 border-b border-gray-100">

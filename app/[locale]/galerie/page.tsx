@@ -1,6 +1,7 @@
-'use client';
+﻿'use client';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 type Category = 'all' | 'rooms' | 'exterior' | 'facilities';
 
@@ -53,7 +54,7 @@ export default function GalleryPage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[250px] animate-fade-in-up delay-200">
           {filteredImages.map((img, index) => (
             <div key={index} className={`relative overflow-hidden rounded-2xl group cursor-pointer ${img.span} shadow-sm`}>
-              <img src={img.src} alt={img.alt} className="w-full h-full object-cover group-hover:scale-110 transition duration-700 ease-in-out" />
+              <Image src={img.src} alt={img.alt} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover group-hover:scale-110 transition duration-700 ease-in-out" />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
                 <p className="text-white font-bold text-lg transform translate-y-4 group-hover:translate-y-0 transition duration-300">{img.alt}</p>
               </div>
