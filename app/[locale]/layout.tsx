@@ -6,6 +6,8 @@ import { routing } from '@/i18n/routing';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import MobileFloatingCTA from '@/components/layout/MobileFloatingCTA';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { organizationSchema, hotelSchema } from '@/lib/structured-data';
 import { Jost } from 'next/font/google';
 import '../globals.css';
 
@@ -92,7 +94,9 @@ export default async function LocaleLayout({
     <html lang={locale} className={jost.variable}>
       <body className="min-h-screen bg-white text-gray-900 antialiased flex flex-col font-sans pb-20 md:pb-0">
         <NextIntlClientProvider messages={messages}>
-          <Header />
+                  <JsonLd data={organizationSchema(locale as 'fr' | 'en')} />
+        <JsonLd data={hotelSchema(locale as 'fr' | 'en')} />
+        <Header />
           <main className="flex-1">{children}</main>
           <Footer />
           <MobileFloatingCTA />

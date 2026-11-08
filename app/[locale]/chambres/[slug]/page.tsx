@@ -4,6 +4,8 @@ import { Link } from '@/i18n/navigation';
 import { prisma } from '@/lib/prisma';
 import RoomGallery from '@/components/rooms/RoomGallery';
 import ShareButton from '@/components/ui/ShareButton';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { roomSchema, breadcrumbSchema } from '@/lib/structured-data';
 import type { Metadata } from 'next';
 
 export async function generateMetadata({
@@ -58,6 +60,9 @@ export default async function RoomDetailPage({
 
   return (
     <div className="bg-white min-h-screen pb-20">
+      <JsonLd data={roomSchema(locale as 'fr' | 'en', room)} />
+      <JsonLd data={breadcrumbSchema(locale as 'fr' | 'en', [{ name: 'Accueil', path: '' }, { name: 'Chambres', path: '/chambres' }, { name: name, path: '/chambres/' + slug }])} />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Link href="/chambres" className="inline-flex items-center text-sm font-medium text-emerald-700 hover:text-emerald-900 mb-6 animate-fade-in-up">
           <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
