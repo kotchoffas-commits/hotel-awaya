@@ -114,3 +114,20 @@ model AdminUser {
   role         String   @default("admin")
   createdAt    DateTime @default(now())
 }
+
+model SponsorRequest {
+  id          String   @id @default(cuid())
+  reference   String   @unique
+  type        String   @default("PARTNER")
+  company     String
+  contactName String
+  email       String
+  phone       String?
+  website     String?
+  budget      String?
+  message     String?  @db.Text
+  status      String   @default("PENDING")
+  isNotified  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

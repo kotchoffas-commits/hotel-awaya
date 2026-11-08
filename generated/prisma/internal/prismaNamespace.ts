@@ -401,7 +401,8 @@ export const ModelName = {
   Booking: 'Booking',
   BookingRequest: 'BookingRequest',
   PromoCode: 'PromoCode',
-  AdminUser: 'AdminUser'
+  AdminUser: 'AdminUser',
+  SponsorRequest: 'SponsorRequest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -417,7 +418,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "room" | "booking" | "bookingRequest" | "promoCode" | "adminUser"
+    modelProps: "room" | "booking" | "bookingRequest" | "promoCode" | "adminUser" | "sponsorRequest"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -791,6 +792,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SponsorRequest: {
+      payload: Prisma.$SponsorRequestPayload<ExtArgs>
+      fields: Prisma.SponsorRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SponsorRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SponsorRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SponsorRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SponsorRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.SponsorRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SponsorRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SponsorRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SponsorRequestPayload>
+        }
+        findMany: {
+          args: Prisma.SponsorRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SponsorRequestPayload>[]
+        }
+        create: {
+          args: Prisma.SponsorRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SponsorRequestPayload>
+        }
+        createMany: {
+          args: Prisma.SponsorRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SponsorRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SponsorRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.SponsorRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SponsorRequestPayload>
+        }
+        update: {
+          args: Prisma.SponsorRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SponsorRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.SponsorRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SponsorRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SponsorRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SponsorRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.SponsorRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SponsorRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.SponsorRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSponsorRequest>
+        }
+        groupBy: {
+          args: Prisma.SponsorRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SponsorRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SponsorRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SponsorRequestCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -923,6 +998,26 @@ export const AdminUserScalarFieldEnum = {
 } as const
 
 export type AdminUserScalarFieldEnum = (typeof AdminUserScalarFieldEnum)[keyof typeof AdminUserScalarFieldEnum]
+
+
+export const SponsorRequestScalarFieldEnum = {
+  id: 'id',
+  reference: 'reference',
+  type: 'type',
+  company: 'company',
+  contactName: 'contactName',
+  email: 'email',
+  phone: 'phone',
+  website: 'website',
+  budget: 'budget',
+  message: 'message',
+  status: 'status',
+  isNotified: 'isNotified',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SponsorRequestScalarFieldEnum = (typeof SponsorRequestScalarFieldEnum)[keyof typeof SponsorRequestScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1215,6 +1310,7 @@ export type GlobalOmitConfig = {
   bookingRequest?: Prisma.BookingRequestOmit
   promoCode?: Prisma.PromoCodeOmit
   adminUser?: Prisma.AdminUserOmit
+  sponsorRequest?: Prisma.SponsorRequestOmit
 }
 
 /* Types for Logging */

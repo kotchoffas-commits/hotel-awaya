@@ -66,3 +66,8 @@ export type PromoCode = Prisma.PromoCodeModel
  * 
  */
 export type AdminUser = Prisma.AdminUserModel
+/**
+ * Model SponsorRequest
+ * 
+ */
+export type SponsorRequest = Prisma.SponsorRequestModel

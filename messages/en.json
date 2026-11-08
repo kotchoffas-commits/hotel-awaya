@@ -208,5 +208,28 @@
     "defaultTitle": "Awaya Hotel Colline 132 — Boutique Hotel in Benin",
     "defaultDescription": "Stay at Awaya Hotel Colline 132, a peaceful haven in the hills of Benin. Elegant rooms, 24/7 service, online booking.",
     "keywords": "hotel Benin, Colline 132 hotel, Benin stay, hotel booking, Awaya hotel"
+  },
+  "sponsors": {
+    "title": "Become a partner",
+    "subtitle": "Associate your brand with Awaya Hotel Colline 132",
+    "intro": "Want to sponsor an event, offer a service, or become a hotel partner? Fill in this form, our team will get back to you shortly.",
+    "form": {
+      "type": "Partnership type",
+      "typePartner": "Partner",
+      "typeSponsor": "Sponsor",
+      "company": "Company / Organization",
+      "contactName": "Contact person",
+      "email": "Email",
+      "phone": "Phone (optional)",
+      "website": "Website (optional)",
+      "budget": "Estimated budget (optional)",
+      "message": "Message",
+      "submit": "Send my request",
+      "sending": "Sending...",
+      "success": "Thank you! Your request has been sent.",
+      "successRef": "Your reference",
+      "successHint": "Our team will get back to you within 48h.",
+      "error": "An error occurred. Please try again."
+    }
   }
 }

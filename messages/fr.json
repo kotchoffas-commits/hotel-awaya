@@ -208,5 +208,28 @@
     "defaultTitle": "Hôtel Awaya Colline 132 — Hôtel de charme au Bénin",
     "defaultDescription": "Séjournez à l'Hôtel Awaya Colline 132, un havre de paix au cœur de la colline au Bénin. Chambres élégantes, service 24h/24, réservation en ligne.",
     "keywords": "hôtel Bénin, hôtel Colline 132, séjour Bénin, réservation hôtel, hotel Awaya"
+  },
+  "sponsors": {
+    "title": "Devenir partenaire",
+    "subtitle": "Associez votre marque à l'Hôtel Awaya Colline 132",
+    "intro": "Vous souhaitez sponsoriser un événement, proposer un service ou devenir partenaire de l'hôtel ? Remplissez ce formulaire, notre équipe vous recontactera rapidement.",
+    "form": {
+      "type": "Type de partenariat",
+      "typePartner": "Partenaire",
+      "typeSponsor": "Sponsor",
+      "company": "Entreprise / Organisation",
+      "contactName": "Personne de contact",
+      "email": "Email",
+      "phone": "Téléphone (optionnel)",
+      "website": "Site web (optionnel)",
+      "budget": "Budget estimé (optionnel)",
+      "message": "Message",
+      "submit": "Envoyer ma demande",
+      "sending": "Envoi en cours...",
+      "success": "Merci ! Votre demande a bien été envoyée.",
+      "successRef": "Votre référence",
+      "successHint": "Notre équipe vous recontactera sous 48h.",
+      "error": "Une erreur est survenue. Merci de réessayer."
+    }
   }
 }

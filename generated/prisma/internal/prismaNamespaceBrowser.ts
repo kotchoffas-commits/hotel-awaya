@@ -55,7 +55,8 @@ export const ModelName = {
   Booking: 'Booking',
   BookingRequest: 'BookingRequest',
   PromoCode: 'PromoCode',
-  AdminUser: 'AdminUser'
+  AdminUser: 'AdminUser',
+  SponsorRequest: 'SponsorRequest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -167,6 +168,26 @@ export const AdminUserScalarFieldEnum = {
 } as const
 
 export type AdminUserScalarFieldEnum = (typeof AdminUserScalarFieldEnum)[keyof typeof AdminUserScalarFieldEnum]
+
+
+export const SponsorRequestScalarFieldEnum = {
+  id: 'id',
+  reference: 'reference',
+  type: 'type',
+  company: 'company',
+  contactName: 'contactName',
+  email: 'email',
+  phone: 'phone',
+  website: 'website',
+  budget: 'budget',
+  message: 'message',
+  status: 'status',
+  isNotified: 'isNotified',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SponsorRequestScalarFieldEnum = (typeof SponsorRequestScalarFieldEnum)[keyof typeof SponsorRequestScalarFieldEnum]
 
 
 export const SortOrder = {
