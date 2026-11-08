@@ -49,3 +49,7 @@ FIX*.txt
 VUE.txt
 *.bak
 VALIDATE.txt
+# Fichiers d'audit / logs temporaires (racine uniquement)
+/*.txt
+!package-lock.txt
+!README.txt
